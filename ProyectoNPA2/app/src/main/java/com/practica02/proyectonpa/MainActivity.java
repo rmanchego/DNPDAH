@@ -35,5 +35,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        System.out.print("Hola");
     }
 }
