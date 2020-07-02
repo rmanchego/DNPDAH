@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.practica02.proyectonpa.R;
 
 public class ContadorPasos extends AppCompatActivity {
-
+    //Contador de Pasos V 1.0
     private double valoranterior=0;
     private int contarPasos=0;
     TextView viewPasos;
