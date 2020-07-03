@@ -26,6 +26,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Controller.QrScanner"/>
+
     <activity android:name=".Model.CapturarActivity"
         android:screenOrientation="fullSensor"
         android:stateNotNeeded="true"
