@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.practica02.proyectonpa.Controller.ContadorPasos;
+import com.practica02.proyectonpa.MainActivity;
 import com.practica02.proyectonpa.R;
 
 @TargetApi(Build.VERSION_CODES.M)
@@ -51,7 +52,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(context, ContadorPasos.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 context.startActivity(intent);
