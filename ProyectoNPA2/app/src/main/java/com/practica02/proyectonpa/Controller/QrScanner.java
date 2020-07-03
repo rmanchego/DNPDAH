@@ -2,6 +2,9 @@ package com.practica02.proyectonpa.Controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -11,8 +14,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.practica02.proyectonpa.Model.CapturarActivity;
+import com.practica02.proyectonpa.R;
 
-public class QrScanner extends AppCompatActivity {
+public class QrScanner extends AppCompatActivity implements View.OnClickListener{
+    Button scanBtn;
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        scanCode();
+    }
+
+    @Override
+    public void onClick(View v) {
+        scanCode();
+    }
     public void scanCode(){
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(CapturarActivity.class);
@@ -30,7 +45,7 @@ public class QrScanner extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(result.getContents());
                 builder.setTitle("Datos del Paciente");
-                builder.setPositiveButton("Volviendo a Scannear", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Volver a Scannear", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         scanCode();
@@ -50,4 +65,6 @@ public class QrScanner extends AppCompatActivity {
             super.onActivityResult(requestCode,resultCode,data);
         }
     }
+
+
 }
