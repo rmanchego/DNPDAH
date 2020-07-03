@@ -29,15 +29,17 @@ public class Frag4 extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        scanBtn = (Button) getView().findViewById(R.id.scanBtn);
+       // scanBtn = (Button) getView().findViewById(R.id.scanBtn);
+        Intent intenttt = new Intent(getActivity(),QrScanner.class);
+        startActivity(intenttt);
 
-        scanBtn.setOnClickListener(new View.OnClickListener() {
+       /* scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), QrScanner.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 
