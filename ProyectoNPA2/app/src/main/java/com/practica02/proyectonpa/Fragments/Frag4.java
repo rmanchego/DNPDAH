@@ -23,25 +23,17 @@ public class Frag4 extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag4_layout,container,false);
-    }
+        View v = inflater.inflate(R.layout.frag4_layout,container,false);
+        scanBtn = v.findViewById(R.id.scanBtn);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-       // scanBtn = (Button) getView().findViewById(R.id.scanBtn);
-        Intent intenttt = new Intent(getActivity(),QrScanner.class);
-        startActivity(intenttt);
-
-       /* scanBtn.setOnClickListener(new View.OnClickListener() {
+        scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), QrScanner.class);
+                Intent intent = new Intent(getActivity(),QrScanner.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
+        return v;
     }
-
 }

@@ -24,31 +24,31 @@ public class ContadorPasos extends AppCompatActivity {
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         final Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        SensorEventListener contadorPasos = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                if(event!=null){
-                    float x = event.values[0];
-                    float y = event.values[1];
-                    float z = event.values[2];
+            SensorEventListener contadorPasos = new SensorEventListener() {
+                @Override
+                public void onSensorChanged(SensorEvent event) {
+                    if(event!=null){
+                        float x = event.values[0];
+                        float y = event.values[1];
+                        float z = event.values[2];
 
-                    double valor = Math.sqrt(x*x + y*y + z*z);
-                    double val2 = valor-valoranterior;
-                    valoranterior = valor;
+                        double valor = Math.sqrt(x*x + y*y + z*z);
+                        double val2 = valor-valoranterior;
+                        valoranterior = valor;
 
-                    if(val2 >6){
-                        contarPasos++;
+                        if(val2 >6){
+                            contarPasos++;
+                        }
+                        viewPasos.setText(String.valueOf(contarPasos));
+
                     }
-                    viewPasos.setText(String.valueOf(contarPasos));
+                }
+
+                @Override
+                public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
                 }
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-            }
-        };
-        sensorManager.registerListener(contadorPasos,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+            };
+            sensorManager.registerListener(contadorPasos,sensor,SensorManager.SENSOR_DELAY_NORMAL);
     }
 }

@@ -1,139 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frag3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:gravity="center_vertical"
+    tools:context=".Controller.ContadorPasos">
 
     <TextView
-        android:id="@+id/textView14"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="match_parent"
+        android:id="@+id/headingLabelFrag"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contador de pasos" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp"
+        android:text="Contador de Pasos"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
+        android:id="@+id/fingerprintImageFrag"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
+        android:layout_below="@+id/headingLabel"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/personacaminando" />
+
+
+    <TextView
+        android:id="@+id/id_viewpasosFrag"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:layout_below="@+id/fingerprintImageFrag"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"
+        android:padding="20dp"
+        android:hint="0"
+        android:textAlignment="center" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Pasos" />
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"
-            tools:ignore="DuplicateIds" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:text="Iniciar" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:text="Detener" />
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:text="Reiniciar" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
