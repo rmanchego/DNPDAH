@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.practica02.proyectonpa.Frag1;
-import com.practica02.proyectonpa.Frag2;
-import com.practica02.proyectonpa.Frag3;
-import com.practica02.proyectonpa.Frag4;
+import com.practica02.proyectonpa.Fragments.Frag1;
+import com.practica02.proyectonpa.Fragments.Frag2;
+import com.practica02.proyectonpa.Fragments.Frag3;
+import com.practica02.proyectonpa.Fragments.Frag4;
 import com.practica02.proyectonpa.R;
 
 /**

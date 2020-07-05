@@ -1,4 +1,4 @@
-package com.practica02.proyectonpa;
+package com.practica02.proyectonpa.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.practica02.proyectonpa.Controller.QrScanner;
+import com.practica02.proyectonpa.R;
 
 public class Frag4 extends Fragment{
     private Button scanBtn;

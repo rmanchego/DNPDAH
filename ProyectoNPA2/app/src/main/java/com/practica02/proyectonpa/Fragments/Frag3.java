@@ -1,4 +1,4 @@
-package com.practica02.proyectonpa;
+package com.practica02.proyectonpa.Fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.practica02.proyectonpa.R;
 
 public class Frag3 extends Fragment {
     @SuppressLint("ResourceType")

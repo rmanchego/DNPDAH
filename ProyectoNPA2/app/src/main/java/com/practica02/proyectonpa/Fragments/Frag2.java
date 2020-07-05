@@ -1,4 +1,4 @@
-package com.practica02.proyectonpa;
+package com.practica02.proyectonpa.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.practica02.proyectonpa.AgregarVisita;
+import com.practica02.proyectonpa.R;
 
 public class Frag2 extends Fragment {
 
