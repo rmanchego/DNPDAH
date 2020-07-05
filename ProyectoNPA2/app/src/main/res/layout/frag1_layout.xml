@@ -1,49 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controller.UbicacionActivity">
 
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context=".Frag1">
+    <TableRow android:padding="30dip">
 
-    <TextView
-        android:id="@+id/editText3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Inicio" />
+        <TextView
+            android:id="@+id/textView9Frag"
+            android:layout_width="105dp"
+            android:layout_height="45dp"
+            android:text="Latitud" />
 
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textPostalAddress" />
+        <TextView
+            android:id="@+id/latitudViewFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Esperando ... " />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Destino" />
+    </TableRow>
 
-    <EditText
-        android:id="@+id/editText6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textPostalAddress" />
+    <TableRow android:padding="30dip" >
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView4"
-        android:layout_width="match_parent"
-        android:layout_height="415dp"
-        android:layout_weight="1" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView24Frag"
+            android:layout_width="105dp"
+            android:layout_height="45dp"
+            android:text="Longitud" />
+
+        <TextView
+            android:id="@+id/longitudViewFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Esperando ..." />
+
+    </TableRow>
+
+
+
+
+</TableLayout>
