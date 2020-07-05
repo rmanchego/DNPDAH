@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.practica02.proyectonpa">
 
-    
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
-    
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.ContadorPasos"></activity>
+        <activity android:name=".Controller.UbicacionActivity"></activity>
+        <activity android:name=".Controller.ContadorPasos" />
         <activity android:name=".Controller.IngresoHuella" />
         <activity android:name=".AgregarVisita" />
         <activity
@@ -25,19 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Controller.QrScanner"/>
-
-    <activity android:name=".Model.CapturarActivity"
-        android:screenOrientation="fullSensor"
-        android:stateNotNeeded="true"
-        android:windowSoftInputMode="stateAlwaysHidden"/>
-
-
+        <activity android:name=".Controller.QrScanner" />
+        <activity
+            android:name=".Model.CapturarActivity"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
-
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-    
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
