@@ -39,12 +39,15 @@
             android:text=" Esperando ..." />
 
     </TableRow>
+<Button
+    android:text="Ir al mapa"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/btnIralMapa"/>
 
-    <Button
-        android:id="@+id/btnGPSFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" Obtener Ubicacion."
-        />
+<include
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    layout="@layout/fragment_maps"/>
 
 </TableLayout>

@@ -5,40 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.core.content.ContextCompat;
-
-import com.practica02.proyectonpa.Controller.UbicacionActivity;
-
-import java.security.Provider;
 
 public class LocationBroadcastReceiver extends BroadcastReceiver {
-
-    public double latitud,longitud;
-
+    private UbicacionActivityInf ubicacionActivityInf;
+    public LocationBroadcastReceiver(UbicacionActivityInf ubicacionActivityInf) {
+        this.ubicacionActivityInf = ubicacionActivityInf;
+    }
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.hasExtra(LocationManager.KEY_LOCATION_CHANGED)){ //Constante de cambio de ubicación
-            String locationKey = LocationManager.KEY_LOCATION_CHANGED;
-            Location ubicacion = (Location) intent.getExtras().get(locationKey);
-            latitud = ubicacion.getLatitude();
-            longitud = ubicacion.getLongitude();
+        if (intent.hasExtra(LocationManager.KEY_LOCATION_CHANGED)) {
+            String locationChanged = LocationManager.KEY_LOCATION_CHANGED;
+            Location location = (Location) intent.getExtras().get(locationChanged);
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            ubicacionActivityInf.DisplayLocationChange(latitude,longitude);
         }
-
-        else {
-            Toast.makeText(context,"Null",Toast.LENGTH_SHORT).show();
-        }
-        enviarDatos(context);
     }
-    public void enviarDatos(Context context){
-        Intent intentActivity = new Intent(context, UbicacionActivity.class);
-        intentActivity.putExtra("LATITUDE", String.valueOf(latitud));
-        intentActivity.putExtra("LONGITUDE", String.valueOf(longitud));
-        intentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intentActivity);
 
-    }
 }

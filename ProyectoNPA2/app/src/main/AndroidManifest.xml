@@ -38,8 +38,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Controller.UbicacionActivity" />
         <activity android:name=".Controller.ContadorPasos" />
+        <activity android:name=".Controller.UbicacionActivity" />
         <activity android:name=".Controller.IngresoHuella" />
         <activity android:name=".AgregarVisita" />
         <activity

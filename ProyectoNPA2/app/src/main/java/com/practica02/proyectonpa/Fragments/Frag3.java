@@ -70,7 +70,7 @@ public class Frag3 extends Fragment {
             public void onClick(View v) {
                 caminando = false;
                 contarPasos = 0;
-                viewPasos.setText(0);
+                viewPasos.setText("0");
                 btnComenzar.setEnabled(true);
                 btnContinuar.setEnabled(false);
                 btnDetener.setEnabled(false);
