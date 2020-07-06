@@ -12,6 +12,7 @@ import com.practica02.proyectonpa.Fragments.Frag1;
 import com.practica02.proyectonpa.Fragments.Frag2;
 import com.practica02.proyectonpa.Fragments.Frag3;
 import com.practica02.proyectonpa.Fragments.Frag4;
+import com.practica02.proyectonpa.Fragments.Frag5;
 import com.practica02.proyectonpa.R;
 
 /**
@@ -21,7 +22,7 @@ import com.practica02.proyectonpa.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3, R.string.tab_text_4};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_3,R.string.tab_text_4, R.string.tab_text_5,R.string.tab_text_2};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -40,13 +41,16 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new Frag1();
                 break;
             case 1:
-                fragment = new Frag2();
-                break;
-            case 2:
                 fragment = new Frag3();
                 break;
+            case 2:
+                fragment = new Frag4();
+                break;
             case 3:
-                fragment = new Frag4()  ;
+                fragment = new Frag5();
+                break;
+            case 4:
+                fragment = new Frag2();
                 break;
         }
         return fragment;
