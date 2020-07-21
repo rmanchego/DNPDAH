@@ -34,8 +34,8 @@ public class Frag1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag1_layout, container, false);
 
-        tvUbicacionLatitud = v.findViewById(R.id.txtLatitud);
-        tvUbicacionLongitud = v.findViewById(R.id.txtLongitud);
+      /*  tvUbicacionLatitud = v.findViewById(R.id.txtLatitud);
+        tvUbicacionLongitud = v.findViewById(R.id.txtLongitud);*/
         btniralMapa = v.findViewById(R.id.btnIralMapa);
         btniralMapa.setOnClickListener(new View.OnClickListener() {
             @Override
