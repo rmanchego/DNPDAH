@@ -119,6 +119,14 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(this,"Las grabaciones se encuentran en: " + recordingDir.getPath(),Toast.LENGTH_LONG).show();
                 return true;
+
+            case R.id.item_ver_info:
+                Intent intent = new Intent(MainActivity.this,VerInfoUsuario.class);
+                startActivity(intent);
+
+            case R.id.item_logout:
+                //AQUI NO SE QUE PONDRAS
+
         }
 
 
