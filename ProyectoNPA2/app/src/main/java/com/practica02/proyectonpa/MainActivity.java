@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.practica02.proyectonpa.Controller.AudioRecorder;
 import com.practica02.proyectonpa.ui.main.SectionsPagerAdapter;
 
@@ -125,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             case R.id.item_logout:
-                //AQUI NO SE QUE PONDRAS
+                FirebaseAuth.getInstance().signOut();
+                returnLogin();
 
         }
 
@@ -133,7 +135,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    private void returnLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
 
     ///////////////////////////////Microfono/////////////////////////////////////////////
 

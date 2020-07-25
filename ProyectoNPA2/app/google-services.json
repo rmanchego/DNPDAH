@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1023301117031",
+    "firebase_url": "https://idnp-dah.firebaseio.com",
+    "project_id": "idnp-dah",
+    "storage_bucket": "idnp-dah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023301117031:android:90cedb01dd1d43cc23a0c2",
+        "android_client_info": {
+          "package_name": "com.practica02.proyectonpa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023301117031-ovgqt6v7go7cnra68jpgf9v16rtpoktq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm6U4Fdhb7EjJdxou9wm3nlQof98dmugQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023301117031-ovgqt6v7go7cnra68jpgf9v16rtpoktq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
