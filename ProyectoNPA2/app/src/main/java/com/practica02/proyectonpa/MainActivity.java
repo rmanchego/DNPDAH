@@ -124,10 +124,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_ver_info:
                 Intent intent = new Intent(MainActivity.this,VerInfoUsuario.class);
                 startActivity(intent);
+                return true;
 
             case R.id.item_logout:
                 FirebaseAuth.getInstance().signOut();
                 returnLogin();
+                return true;
 
         }
 
