@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UbicacionActivity">
+
+
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:padding="30dip">
+
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="45dp"
+            android:text="Latitud" />
+
+        <TextView
+            android:id="@+id/id_latitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint=" Esperando ... " />
+
+    </TableRow>
+
+    <TableRow android:padding="30dip" >
+
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="45dp"
+            android:text="Longitud" />
+
+        <TextView
+            android:id="@+id/id_longitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint=" Esperando ..." />
+
+    </TableRow>
+
+
+    <TableRow android:padding="30dip" >
+
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="45dp"
+            android:text="Direccion" />
+
+        <TextView
+            android:id="@+id/id_direccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint=" Esperando ..." />
+
+    </TableRow>
+
+    <Button
+        android:id="@+id/btnirFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@mipmap/icon_camara"
+        android:drawablePadding="8dp"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#ef9a9a"
+        android:text="Tomar Foto"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</TableLayout>
