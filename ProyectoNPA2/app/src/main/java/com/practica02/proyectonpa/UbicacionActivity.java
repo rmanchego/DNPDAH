@@ -51,15 +51,14 @@ public class UbicacionActivity extends AppCompatActivity {
         txtDireccion = (TextView) findViewById(R.id.id_direccion);
 
         btnirFoto = (Button) findViewById(R.id.btnirFoto);
-        btnirFoto.setOnClickListener(new View.OnClickListener() {
+        /*btnirFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UbicacionActivity.this, CamaraActivity.class);
                 startActivity(intent);
                 //  Toast.makeText(getApplicationContext(),"Su dirección es: " + txtDireccion.getText(),Toast.LENGTH_LONG).show();
             }
-        });
-
+        });*/
     }
 
     private ObtenerDatosUbicacion mainActivityInf2 = new ObtenerDatosUbicacion() {
@@ -93,6 +92,17 @@ public class UbicacionActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, "broadcastReceiver is null");
         }
+        btnirFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UbicacionActivity.this, CamaraActivity.class);
+                intent.putExtra("latitud", txtlatitud.getText().toString());
+                intent.putExtra("longitud", txtlongitud.getText().toString());
+                intent.putExtra("direccion", txtDireccion.getText().toString());
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

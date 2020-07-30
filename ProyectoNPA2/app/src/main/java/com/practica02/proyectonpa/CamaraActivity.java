@@ -18,6 +18,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -35,7 +36,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -43,6 +46,14 @@ import java.util.UUID;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Foto;
+import com.practica02.proyectonpa.Model.Persistencia.FotoDAO;
+import com.practica02.proyectonpa.Model.Utilidades.Constantes;
 
 public class CamaraActivity extends AppCompatActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -69,22 +80,36 @@ public class CamaraActivity extends AppCompatActivity {
     private CaptureRequest.Builder mPreviewCaptureRequest;
     private File outputFile;
     Button btnTakePicture;
+    private String latitud;
+    private String longitud;
+    private String dirección;
+
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camara);
         verifyStoragePermissions(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         btnTakePicture = (Button) findViewById(R.id.btnTakePicture);
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG,"foto tomada");
                 takePicture();
+                Log.d(TAG,"foto tomada");
             }
         });
         //checkcameras();
         init();
-
+        latitud = getIntent().getExtras().getString("latitud");
+        longitud = getIntent().getExtras().getString("longitud");
+        dirección = getIntent().getExtras().getString("direccion");
     }
 
     private void init() {
@@ -226,11 +251,14 @@ public class CamaraActivity extends AppCompatActivity {
         File fileImagen =new File(Environment.getExternalStorageDirectory(),RUTA_IMAGEN);
         boolean isCreada=fileImagen.exists();
         String nombreImagen="";
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("SSS.ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
+        nombreImagen = simpleDateFormat.format(date);
         if(isCreada==false){
             isCreada=fileImagen.mkdirs();
         }
         if(isCreada==true){
-            nombreImagen=(System.currentTimeMillis()/1000)+".jpg";
+            nombreImagen += ".jpg";
         }
         try {
             // String path = Environment.getExternalStorageState().toString();
@@ -243,6 +271,33 @@ public class CamaraActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeFile(outputFile.getAbsolutePath());
                 capturarImagen = (ImageView) findViewById(R.id.capturarImagen);
                 capturarImagen.setImageBitmap(bitmap);
+
+                Uri fotoUri = Uri.fromFile(outputFile);
+
+                FotoDAO.getInstancia().subirFotoUri(fotoUri, new FotoDAO.IDevolverURLFoto() {
+                    @Override
+                    public void devolverUrlString(String url) {
+                        Toast.makeText(CamaraActivity.this, "Se guardo la foto correctamente", Toast.LENGTH_SHORT).show();
+
+                        String nombreFoto = "";
+                        Date date = new Date();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
+                        nombreFoto = simpleDateFormat.format(date);
+
+                        Foto fotoTomada = new Foto();
+                        fotoTomada.setFotoPerfilURL(url);
+                        fotoTomada.setNombre(nombreFoto);
+                        fotoTomada.setLatitud(latitud);
+                        fotoTomada.setLongitud(longitud);
+                        fotoTomada.setDireccion(dirección);
+
+                        FirebaseUser currentUser = mAuth.getCurrentUser(); //esto funciona cuando esta registrado correctamente
+                        DatabaseReference reference = database.getReference("FotosTomadas/" + currentUser.getUid()+"/"+nombreFoto); //guarda el mismo uid del usuario en la database
+                        reference.setValue(fotoTomada);
+
+                    }
+                });
+
 
             }
 
