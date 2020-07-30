@@ -4,50 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.UbicacionActivity">
+    tools:context=".UbicacionActivity">
 
-    <TableRow
-        android:layout_height="wrap_content"
-        android:padding="30dip">
-
-        <TextView
-            android:id="@+id/textView9Frag"
-            android:layout_width="105dp"
-            android:layout_height="45dp"
-            android:text="Latitud" />
-
-        <TextView
-            android:id="@+id/latitudViewFrag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Esperando ... " />
-
-    </TableRow>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:src="@drawable/servicioubicacion" />
 
     <TableRow android:padding="30dip" >
 
         <TextView
-            android:id="@+id/textView24Frag"
-            android:layout_width="105dp"
-            android:layout_height="45dp"
-            android:text="Longitud" />
-
-        <TextView
-            android:id="@+id/longitudViewFrag"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Esperando ..." />
+            android:layout_height="45dp"
+            android:text="Aqui describiriamos lo que se debe hacer, algo así, y en la imagen sería poner un video de como usar, algo así." />
+
+
 
     </TableRow>
-<Button
-    android:text="Ir al mapa"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/btnIralMapa"/>
 
-<include
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    layout="@layout/fragment_maps"/>
+    <Button
+        android:id="@+id/idUbicacionbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@mipmap/icon_localizacion"
+        android:drawablePadding="8dp"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#ef9a9a"
+        android:text="Obtener tu ubicación"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
 
 </TableLayout>

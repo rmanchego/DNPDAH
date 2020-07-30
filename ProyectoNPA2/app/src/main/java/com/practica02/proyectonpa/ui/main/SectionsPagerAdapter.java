@@ -14,6 +14,7 @@ import com.practica02.proyectonpa.Fragments.Frag3;
 import com.practica02.proyectonpa.Fragments.Frag4;
 import com.practica02.proyectonpa.Fragments.Frag5;
 import com.practica02.proyectonpa.R;
+import com.practica02.proyectonpa.UbicacionActivity;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

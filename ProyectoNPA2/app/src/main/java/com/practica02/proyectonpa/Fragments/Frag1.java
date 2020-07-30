@@ -13,17 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.practica02.proyectonpa.Controller.UbicacionActivity;
+import com.practica02.proyectonpa.MainActivity;
 import com.practica02.proyectonpa.Model.LocationBroadcastReceiver;
 import com.practica02.proyectonpa.R;
+import com.practica02.proyectonpa.UbicacionActivity;
 
 public class Frag1 extends Fragment {
 
     Bundle datos;
+    private Button btnir;
     private float lat, longi;
     private LocationBroadcastReceiver broadcastReceiver;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99; //Variable para el método checkloactionpermission
-
+    private TextView posicionConocida;
 
     Button btniralMapa;
     TextView tvUbicacionLatitud, tvUbicacionLongitud;
@@ -36,14 +38,18 @@ public class Frag1 extends Fragment {
 
       /*  tvUbicacionLatitud = v.findViewById(R.id.txtLatitud);
         tvUbicacionLongitud = v.findViewById(R.id.txtLongitud);*/
-        btniralMapa = v.findViewById(R.id.btnIralMapa);
-        btniralMapa.setOnClickListener(new View.OnClickListener() {
+
+
+
+        btnir = v.findViewById(R.id.idUbicacionbutton);
+        btnir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), UbicacionActivity.class);
                 startActivity(intent);
             }
         });
+
 
 
         return v;

@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.practica02.proyectonpa.Model.Entidades.Logica.LUsuario;
 import com.practica02.proyectonpa.Model.Persistencia.UsuarioDAO;
 import com.squareup.picasso.Picasso;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VerInfoUsuario extends AppCompatActivity {
