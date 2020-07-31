@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +42,7 @@ import com.practica02.proyectonpa.Model.Persistencia.FotoDAO;
 import com.practica02.proyectonpa.ui.main.SectionsPagerAdapter;
 
 import java.io.File;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private File workingDir;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
-
+    private File outputFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +227,10 @@ public class MainActivity extends AppCompatActivity {
         if (recordingDir.mkdirs()) {
             Log.d(TAG, "Directorio creado qeu contiene todos los archivos grabados el día de hoy");
         }
+
+
+
+
     }
 
     public void startRecording(View view) {
@@ -242,20 +248,24 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Dirección del directorio: " + workingDir.getAbsolutePath());
         }
         audioRecorder.start(workingDir);
+
     }
     public void stopRecording(View view) {
         int grabaciones = audioRecorder.stop();
-        /*Uri audioUri = Uri.fromFile(workingDir);
-        AudioDAO.getInstancia().subirAudioUri(audioUri, new FotoDAO.IDevolverURLFoto() {
+    }
+///////////////////////////////////// / M    E   T   O   D   O   P  A  R  A  S  U  B  I  R  E  L  A  U  D  I  O /////////////////
+    public void saveAudio(File outputFile){
+
+        Uri audioUri = Uri.fromFile(outputFile);
+
+        AudioDAO.getInstancia().subirAudioUri(audioUri, new AudioDAO.IDevolverURLAudio() {
             @Override
             public void devolverUrlString(String url) {
-                Toast.makeText(MainActivity.this, "Se guardo el audio correctamente", Toast.LENGTH_SHORT).show();
-
+                //   Toast.makeText(MainActivity.this, "Se guardo el audio correctamente", Toast.LENGTH_SHORT).show();
                 String nombreAudio = "";
                 Date date = new Date();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
                 nombreAudio = simpleDateFormat.format(date);
-
                 Audio audio = new Audio();
                 audio.setURLAudio(url);
                 audio.setNombre(nombreAudio);
@@ -264,10 +274,8 @@ public class MainActivity extends AppCompatActivity {
                 reference.setValue(audio);
             }
         });
-         */
-
     }
-
+///////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onDestroy() {
         super.onDestroy();

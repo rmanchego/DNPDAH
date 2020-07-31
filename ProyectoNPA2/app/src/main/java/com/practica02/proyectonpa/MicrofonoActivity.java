@@ -31,6 +31,7 @@ import com.practica02.proyectonpa.Model.Persistencia.AudioDAO;
 import com.practica02.proyectonpa.Model.Persistencia.FotoDAO;
 
 import java.io.File;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -48,6 +49,7 @@ public class MicrofonoActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     File workingDir;
+    File externalStorage;
     private View v;
     File root;
     @Override
@@ -109,9 +111,8 @@ public class MicrofonoActivity extends AppCompatActivity {
             Toast.makeText(this, "Debe permitir guardar archivos en su directorio", Toast.LENGTH_SHORT).show();
             return;
         }
-        File externalStorage = new File(android.os.Environment.getExternalStorageDirectory().getAbsolutePath());
+         externalStorage = new File(android.os.Environment.getExternalStorageDirectory().getAbsolutePath());
         root = new File(externalStorage.getAbsolutePath() + "/android_audio_record_stereo");
-
         if (root.mkdirs()) {
             Log.d(TAG, "Creando la ruta del archivo");
         }
@@ -141,35 +142,18 @@ public class MicrofonoActivity extends AppCompatActivity {
         }
         audioRecorder.start(workingDir);
     }
+
+
+
+
     public void stopRecording(View view) {
         int grabaciones = audioRecorder.stop();
-
-        Uri audioUri = Uri.fromFile(workingDir);
-        AudioDAO.getInstancia().subirAudioUri(audioUri, new FotoDAO.IDevolverURLFoto() {
-            @Override
-            public void devolverUrlString(String url) {
-                Toast.makeText(MicrofonoActivity.this, "Se guardo el audio correctamente", Toast.LENGTH_SHORT).show();
-
-                String nombreAudio = "";
-                Date date = new Date();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
-                nombreAudio = simpleDateFormat.format(date);
-
-                Audio audio = new Audio();
-                audio.setURLAudio(url);
-                audio.setNombre(nombreAudio);
-                FirebaseUser currentUser = mAuth.getCurrentUser(); //esto funciona cuando esta registrado correctamente
-                DatabaseReference reference = database.getReference("Audios/" + currentUser.getUid()+"/"+nombreAudio); //guarda el mismo uid del usuario en la database
-                reference.setValue(audio);
-            }
-        });
 
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         audioRecorder.stop();
-        Uri audioUri = Uri.fromFile(workingDir);
         audioRecorder.cleanUp();
     }
 
@@ -192,7 +176,7 @@ public class MicrofonoActivity extends AppCompatActivity {
                 return true;
             case R.id.item_menu_stop:
                 stopRecording(v);
-                Toast.makeText(this,"Se detuvo la grabación, ruta del archivo: " + recordingDir.getPath(),Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Se detuvo la grabación, ruta del archivo: " + audioRecorder.getFilePath(),Toast.LENGTH_LONG).show();
                 return true;
 
         }

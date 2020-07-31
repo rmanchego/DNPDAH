@@ -5,14 +5,27 @@ import android.media.MediaRecorder;
 import android.media.audiofx.AcousticEchoCanceler;
 import android.media.audiofx.AutomaticGainControl;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.practica02.proyectonpa.MainActivity;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Audio;
+import com.practica02.proyectonpa.Model.Persistencia.AudioDAO;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class AudioRecorder {
     private static final String TAG = "Recorder";
@@ -33,7 +46,14 @@ public class AudioRecorder {
 
     private byte[]  buffer;
 
+    public String getFilePath() {
+        return filePath;
+    }
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    String filePath;
     private int payloadSize;
+    private File outputFile;
 
     private boolean recording = false;
     private RandomAccessFile grabandoAudio;
@@ -83,10 +103,9 @@ public class AudioRecorder {
             initRecorder();
         }
 
-        String filePath = wavDir.getAbsolutePath() + "/sample_" + SystemClock.uptimeMillis() + "_Lab11.wav";
+         filePath = wavDir.getAbsolutePath() + "/sample_" + SystemClock.uptimeMillis() + "_Lab11.wav";
         grabandoAudio = prepareFile(filePath, grabandoAudio);
-
-
+        Log.d("Ruta Audio: ", filePath);
         payloadSize = 0;
         recording = true;
         if (recorder.getState() == AudioRecord.STATE_INITIALIZED) {
@@ -193,4 +212,15 @@ public class AudioRecorder {
             recordThread = null;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 }

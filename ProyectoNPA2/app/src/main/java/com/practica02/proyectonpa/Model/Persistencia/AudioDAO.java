@@ -42,27 +42,27 @@ public class AudioDAO {
         referenceAudioStorage = storage.getReference("Audio/" + UsuarioDAO.getInstancia().getKeyUsuario());
     }
 
-    public void subirAudioUri(Uri uri, final FotoDAO.IDevolverURLFoto iDevolverURLFoto){   //Uri -> foto que se elige con el celular
-        String nombreFoto = "";
+    public void subirAudioUri(Uri uri, final IDevolverURLAudio iDevolverURLAudio){   //Uri -> foto que se elige con el celular
+        String nombreAudio = "";
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("SSS.ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
-        nombreFoto = simpleDateFormat.format(date);
-        final StorageReference fotoReferencia = referenceAudioStorage.child(nombreFoto);
+        nombreAudio = simpleDateFormat.format(date);
+        final StorageReference audioReferencia = referenceAudioStorage.child(nombreAudio);
         //Uri u = taskSnapshot.getDownloadUrl();
-        fotoReferencia.putFile(uri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+        audioReferencia.putFile(uri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                 if(!task.isSuccessful()){
                     throw task.getException(); //throw -> llama a la excepcion
                 }
-                return fotoReferencia.getDownloadUrl(); //Si se eligio una foto y se subio a la BD, agarra la url del archivo
+                return audioReferencia.getDownloadUrl(); //Si se eligio una foto y se subio a la BD, agarra la url del archivo
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {  //este metodo captura la url de la foto
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 if(task.isSuccessful()){
                     Uri uri = task.getResult(); //url de la foto que se sube a la BS
-                    iDevolverURLFoto.devolverUrlString(uri.toString());
+                    iDevolverURLAudio.devolverUrlString(uri.toString());
                 }
             }
         });
