@@ -2,6 +2,7 @@ package com.practica02.proyectonpa;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.SystemClock;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +20,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.practica02.proyectonpa.Controller.AudioRecorder;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Audio;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Foto;
+import com.practica02.proyectonpa.Model.Persistencia.AudioDAO;
+import com.practica02.proyectonpa.Model.Persistencia.FotoDAO;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class MicrofonoActivity extends AppCompatActivity {
 
@@ -34,14 +45,19 @@ public class MicrofonoActivity extends AppCompatActivity {
     private Button btnStart;
     private Button btnStop;
     private TextView txtRuta;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    File workingDir;
     private View v;
     File root;
-    File workingDir;
-    File externalStorage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         /////////// Permisos para la aplicación///////////
         int permissionWriteToStorage = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -93,7 +109,7 @@ public class MicrofonoActivity extends AppCompatActivity {
             Toast.makeText(this, "Debe permitir guardar archivos en su directorio", Toast.LENGTH_SHORT).show();
             return;
         }
-         externalStorage = new File(android.os.Environment.getExternalStorageDirectory().getAbsolutePath());
+        File externalStorage = new File(android.os.Environment.getExternalStorageDirectory().getAbsolutePath());
         root = new File(externalStorage.getAbsolutePath() + "/android_audio_record_stereo");
 
         if (root.mkdirs()) {
@@ -109,15 +125,6 @@ public class MicrofonoActivity extends AppCompatActivity {
         }
     }
 
-
-public void saveAudio(){
-        File outputFile = recordingDir.getAbsoluteFile(); //Este quiza sea
-        File outputFile2 = root; //Opcion 3
-        File outputFile3 =  workingDir;  //Opcion 2
-        File outputFile4 = externalStorage; //Opción 4
-}
-
-
     public void startRecording(View view) {
         // Verificando los permisos para la grabacion
         int permissionAudioRecord = ContextCompat.checkSelfPermission(this,
@@ -128,21 +135,41 @@ public void saveAudio(){
             return;
         }
 
-         workingDir = new File(recordingDir.getAbsolutePath() + "/sample_" + SystemClock.elapsedRealtime());
+        workingDir = new File(recordingDir.getAbsolutePath() + "/sample_" + SystemClock.elapsedRealtime());
         if (workingDir.mkdir()) {
             Log.d(TAG, "Dirección del directorio: " + workingDir.getAbsolutePath());
         }
-
         audioRecorder.start(workingDir);
-        saveAudio();
     }
     public void stopRecording(View view) {
         int grabaciones = audioRecorder.stop();
+
+        Uri audioUri = Uri.fromFile(workingDir);
+        AudioDAO.getInstancia().subirAudioUri(audioUri, new FotoDAO.IDevolverURLFoto() {
+            @Override
+            public void devolverUrlString(String url) {
+                Toast.makeText(MicrofonoActivity.this, "Se guardo el audio correctamente", Toast.LENGTH_SHORT).show();
+
+                String nombreAudio = "";
+                Date date = new Date();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
+                nombreAudio = simpleDateFormat.format(date);
+
+                Audio audio = new Audio();
+                audio.setURLAudio(url);
+                audio.setNombre(nombreAudio);
+                FirebaseUser currentUser = mAuth.getCurrentUser(); //esto funciona cuando esta registrado correctamente
+                DatabaseReference reference = database.getReference("Audios/" + currentUser.getUid()+"/"+nombreAudio); //guarda el mismo uid del usuario en la database
+                reference.setValue(audio);
+            }
+        });
+
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         audioRecorder.stop();
+        Uri audioUri = Uri.fromFile(workingDir);
         audioRecorder.cleanUp();
     }
 

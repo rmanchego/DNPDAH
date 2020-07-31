@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,11 +31,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.practica02.proyectonpa.Controller.AudioRecorder;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Audio;
+import com.practica02.proyectonpa.Model.Persistencia.AudioDAO;
+import com.practica02.proyectonpa.Model.Persistencia.FotoDAO;
 import com.practica02.proyectonpa.ui.main.SectionsPagerAdapter;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -48,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     private File recordingDir;
     private TextView txtRuta;
     File root;
+    private File workingDir;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
 
     @Override
@@ -55,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         permisos();
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -222,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        File workingDir = new File(recordingDir.getAbsolutePath() + "/sample_" + SystemClock.elapsedRealtime());
+        workingDir = new File(recordingDir.getAbsolutePath() + "/sample_" + SystemClock.elapsedRealtime());
         if (workingDir.mkdir()) {
             Log.d(TAG, "Dirección del directorio: " + workingDir.getAbsolutePath());
         }
@@ -230,6 +245,27 @@ public class MainActivity extends AppCompatActivity {
     }
     public void stopRecording(View view) {
         int grabaciones = audioRecorder.stop();
+        /*Uri audioUri = Uri.fromFile(workingDir);
+        AudioDAO.getInstancia().subirAudioUri(audioUri, new FotoDAO.IDevolverURLFoto() {
+            @Override
+            public void devolverUrlString(String url) {
+                Toast.makeText(MainActivity.this, "Se guardo el audio correctamente", Toast.LENGTH_SHORT).show();
+
+                String nombreAudio = "";
+                Date date = new Date();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
+                nombreAudio = simpleDateFormat.format(date);
+
+                Audio audio = new Audio();
+                audio.setURLAudio(url);
+                audio.setNombre(nombreAudio);
+                FirebaseUser currentUser = mAuth.getCurrentUser(); //esto funciona cuando esta registrado correctamente
+                DatabaseReference reference = database.getReference("Audios/" + currentUser.getUid()+"/"+nombreAudio); //guarda el mismo uid del usuario en la database
+                reference.setValue(audio);
+            }
+        });
+         */
+
     }
 
     @Override

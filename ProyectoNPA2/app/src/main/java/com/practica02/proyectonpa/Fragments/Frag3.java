@@ -13,12 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Foto;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Pasos;
 import com.practica02.proyectonpa.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import static android.content.Context.SENSOR_SERVICE;
 
@@ -26,9 +37,11 @@ public class Frag3 extends Fragment {
     //Contador de Pasos V 1.0
     private double valoranterior=0;
     private int contarPasos=0;
-    TextView viewPasos;
-    private Button btnComenzar, btnDetener, btnReiniciar,btnContinuar;
-    boolean caminando = false;
+    private TextView viewPasos;
+    private Button btnComenzar, btnDetener, btnReiniciar,btnContinuar, btnGuardar;
+    private boolean caminando = false;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
     @SuppressLint("ResourceType")
     @Nullable
@@ -41,6 +54,11 @@ public class Frag3 extends Fragment {
         btnDetener = v.findViewById(R.id.btnDetenerFrag);
         btnReiniciar = v.findViewById(R.id.btnReiniciarFrag);
         btnContinuar = v.findViewById(R.id.btnContinuarFrag);
+        btnGuardar = v.findViewById(R.id.btnGuardarFrag);
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
 
         SensorManager sensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
         final Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -54,6 +72,7 @@ public class Frag3 extends Fragment {
                 btnContinuar.setEnabled(false);
                 btnDetener.setEnabled(true);
                 btnReiniciar.setEnabled(true);
+                btnGuardar.setEnabled(false);
             }
         });
         btnDetener.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +81,7 @@ public class Frag3 extends Fragment {
                 caminando = false;
                 btnContinuar.setEnabled(true);
                 btnReiniciar.setEnabled(true);
+                btnGuardar.setEnabled(true);
             }
         });
 
@@ -75,6 +95,7 @@ public class Frag3 extends Fragment {
                 btnContinuar.setEnabled(false);
                 btnDetener.setEnabled(false);
                 btnReiniciar.setEnabled(false);
+                btnGuardar.setEnabled(false);
             }
         });
         btnContinuar.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +106,34 @@ public class Frag3 extends Fragment {
                 btnContinuar.setEnabled(false);
                 btnDetener.setEnabled(true);
                 btnReiniciar.setEnabled(true);
+                btnGuardar.setEnabled(false);
+            }
+        });
+
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                caminando = false;
+                btnComenzar.setEnabled(false);
+                btnContinuar.setEnabled(true);
+                btnDetener.setEnabled(true);
+                btnReiniciar.setEnabled(true);
+                btnGuardar.setEnabled(true);
+
+                String nombrePasos = "";
+                Date date = new Date();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
+                nombrePasos = simpleDateFormat.format(date);
+
+                Pasos pasos = new Pasos();
+                pasos.setPasos(contarPasos);
+
+                FirebaseUser currentUser = mAuth.getCurrentUser(); //esto funciona cuando esta registrado correctamente
+                DatabaseReference reference = database.getReference("ContadorPasos/" + currentUser.getUid()+"/"+nombrePasos); //guarda el mismo uid del usuario en la database
+                reference.setValue(pasos);
+
+                Toast.makeText(getActivity(), "Se guardo el dato", Toast.LENGTH_SHORT).show();
+
             }
         });
 
