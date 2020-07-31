@@ -17,6 +17,7 @@ public class AudioRecorder {
     private static final String TAG = "Recorder";
     /////// Uso de AudioRecord////////////
     private AudioRecord recorder;
+
     ///////////////////////////////////
     private HandlerThread recordThread;
     private short nChannels = 2;
@@ -114,6 +115,7 @@ public class AudioRecorder {
                     grabandoAudio.writeInt(Integer.reverseBytes(36 + payloadSize));
                     grabandoAudio.seek(40);    // write size to Subchunk2Size field
                     grabandoAudio.writeInt(Integer.reverseBytes(payloadSize));
+
                     grabandoAudio.close();
                 } catch (IOException e) {
                     Log.e(TAG, e.getLocalizedMessage());

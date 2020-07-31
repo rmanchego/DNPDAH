@@ -36,6 +36,8 @@ public class MicrofonoActivity extends AppCompatActivity {
     private TextView txtRuta;
     private View v;
     File root;
+    File workingDir;
+    File externalStorage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +93,7 @@ public class MicrofonoActivity extends AppCompatActivity {
             Toast.makeText(this, "Debe permitir guardar archivos en su directorio", Toast.LENGTH_SHORT).show();
             return;
         }
-        File externalStorage = new File(android.os.Environment.getExternalStorageDirectory().getAbsolutePath());
+         externalStorage = new File(android.os.Environment.getExternalStorageDirectory().getAbsolutePath());
         root = new File(externalStorage.getAbsolutePath() + "/android_audio_record_stereo");
 
         if (root.mkdirs()) {
@@ -107,6 +109,15 @@ public class MicrofonoActivity extends AppCompatActivity {
         }
     }
 
+
+public void saveAudio(){
+        File outputFile = recordingDir.getAbsoluteFile(); //Este quiza sea
+        File outputFile2 = root; //Opcion 3
+        File outputFile3 =  workingDir;  //Opcion 2
+        File outputFile4 = externalStorage; //Opción 4
+}
+
+
     public void startRecording(View view) {
         // Verificando los permisos para la grabacion
         int permissionAudioRecord = ContextCompat.checkSelfPermission(this,
@@ -117,11 +128,13 @@ public class MicrofonoActivity extends AppCompatActivity {
             return;
         }
 
-        File workingDir = new File(recordingDir.getAbsolutePath() + "/sample_" + SystemClock.elapsedRealtime());
+         workingDir = new File(recordingDir.getAbsolutePath() + "/sample_" + SystemClock.elapsedRealtime());
         if (workingDir.mkdir()) {
             Log.d(TAG, "Dirección del directorio: " + workingDir.getAbsolutePath());
         }
+
         audioRecorder.start(workingDir);
+        saveAudio();
     }
     public void stopRecording(View view) {
         int grabaciones = audioRecorder.stop();
