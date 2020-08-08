@@ -1,92 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    tools:context=".Controller.ContadorPasos">
+    android:id="@+id/frag4"
+    android:layout_margin="10dp">
 
-    <TextView
-        android:id="@+id/headingLabelFrag"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/BotonesFrag3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:padding="20dp"
-        android:text="Contador de Pasos"
-        android:textColor="@android:color/black"
-        android:textSize="24sp" />
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escanear QR"
+            android:layout_weight="1"
+            />
 
-    <ImageView
-        android:id="@+id/fingerprintImageFrag"
-        android:layout_width="122dp"
-        android:layout_height="122dp"
-        android:layout_below="@+id/headingLabelFrag"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/personacaminando" />
+        <Button
+            android:id="@+id/btnAgregarQR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar QR"
+            android:layout_weight="1"
+            />
 
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/id_viewpasosFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fingerprintImageFrag"
-        android:layout_centerHorizontal="true"
-        android:textSize="40dp"
-        android:padding="20dp"
-        android:hint="0"
-        android:textAlignment="center" />
-
-    <Button
-        android:id="@+id/btnComenzarFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_viewpasosFrag"
-        android:textAlignment="center"
-        android:layout_centerHorizontal="true"
-        android:text="Comenzar" />
-
-    <Button
-        android:id="@+id/btnContinuarFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnComenzarFrag"
-        android:textAlignment="center"
-        android:layout_centerHorizontal="true"
-        android:enabled="false"
-        android:text="Continuar" />
-
-    <Button
-        android:id="@+id/btnDetenerFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnContinuarFrag"
-        android:textAlignment="center"
-        android:layout_centerHorizontal="true"
-        android:enabled="false"
-        android:text="Detener" />
-
-    <Button
-        android:id="@+id/btnReiniciarFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnDetenerFrag"
-        android:textAlignment="center"
-        android:layout_centerHorizontal="true"
-        android:enabled="false"
-        android:text="Reiniciar" />
-
-    <Button
-        android:id="@+id/btnGuardarFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnReiniciarFrag"
-        android:textAlignment="center"
-        android:layout_centerHorizontal="true"
-        android:enabled="false"
-        android:text="Guardar" />
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPacientesQR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/BotonesFrag3"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>

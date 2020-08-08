@@ -50,4 +50,6 @@ public class LUsuario {
         Date date = new Date(fecha);
         return simpleDateFormat.format(date);
     }
+
+
 }

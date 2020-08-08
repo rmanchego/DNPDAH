@@ -53,6 +53,10 @@ dependencies {
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
     testImplementation 'junit:junit:4.12'
 
+    //CodeQR
+    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'

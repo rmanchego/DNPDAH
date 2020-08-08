@@ -6,5 +6,8 @@ public class Constantes {
     public static final String NODO_DE_USUARIOS = "Usuarios";
     public static final String NODO_DE_FOTOS_UBICACION = "FotosUbicacion";
     public static final String NODO_DE_AUDIO_UBICACION = "AudioUbicacion";
+    public static final String NODO_DE_PASOS = "ContadorPasos";
+    public static final String NODO_DE_PACIENTES_QR = "PacientesQR";
+
 
 }

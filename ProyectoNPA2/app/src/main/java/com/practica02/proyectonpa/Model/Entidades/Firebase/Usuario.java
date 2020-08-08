@@ -6,9 +6,6 @@ public class Usuario {
     private String correo;
     private long fechaDeNacimiento;
     private String genero;
-    private float Altura;
-    private float Peso;
-    private float Presion;
 
     public Usuario() {
     }
@@ -54,29 +51,5 @@ public class Usuario {
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public float getAltura() {
-        return Altura;
-    }
-
-    public void setAltura(float altura) {
-        Altura = altura;
-    }
-
-    public float getPeso() {
-        return Peso;
-    }
-
-    public void setPeso(float peso) {
-        Peso = peso;
-    }
-
-    public float getPresion() {
-        return Presion;
-    }
-
-    public void setPresion(float presion) {
-        Presion = presion;
     }
 }

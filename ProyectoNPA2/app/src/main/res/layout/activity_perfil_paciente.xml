@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/fotoQrcodePerfil"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="20sp"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/fotoPacientePerfil"
+        android:layout_toRightOf="@id/fotoQrcodePerfil"/>
+
+    <TextView
+        android:layout_below="@id/fotoQrcodePerfil"
+        android:id="@+id/tvFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo QR"
+        android:layout_marginLeft="85dp"
+        />
+
+    <TextView
+        android:layout_below="@id/fotoQrcodePerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Foto del paciente"
+        android:layout_toRightOf="@id/tvFoto"
+        android:layout_marginLeft="95dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombres: "
+        android:layout_marginTop="30dp"
+        android:textSize="17dp"
+        android:layout_below="@id/fotoQrcodePerfil"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/txtPacienteNombrePerfil"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint=""
+        android:textSize="17dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/fotoQrcodePerfil"
+        android:gravity="center"
+        android:id="@+id/txtPacienteNombrePerfil"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha de  Nacimiento:"
+        android:layout_marginTop="5dp"
+        android:textSize="13dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/txtPacienteNombrePerfil"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/txtPacienteNombrePerfil"
+        android:gravity="right"/>
+
+    <TextView
+        android:id="@+id/txtPacienteFechaDeNacimientoPerfil"
+        android:layout_width="200dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/txtPacienteNombrePerfil"
+        android:layout_centerHorizontal="true"
+        android:textSize="17dp"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:inputType="date" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genero: "
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:layout_below="@id/txtPacienteFechaDeNacimientoPerfil"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/txtPacienteGeneroPerfil"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint=""
+        android:textSize="17dp"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/txtPacienteFechaDeNacimientoPerfil"
+        android:gravity="center"
+        android:id="@+id/txtPacienteGeneroPerfil"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peso: "
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:layout_below="@id/txtPacienteGeneroPerfil"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/txtPacientePesoPerfil"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/txtPacienteGeneroPerfil"
+        android:gravity="center"
+        android:textSize="17dp"
+
+        android:id="@+id/txtPacientePesoPerfil"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Altura: "
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:layout_below="@id/txtPacientePesoPerfil"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/txtPacienteAlturaPerfil"/>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint=""
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txtPacientePesoPerfil"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textSize="17dp"
+
+        android:id="@+id/txtPacienteAlturaPerfil"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Presión: "
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:layout_below="@id/txtPacienteAlturaPerfil"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/txtPacientePresionPerfil"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint=""
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txtPacienteAlturaPerfil"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+
+        android:id="@+id/txtPacientePresionPerfil"/>
+
+</RelativeLayout>

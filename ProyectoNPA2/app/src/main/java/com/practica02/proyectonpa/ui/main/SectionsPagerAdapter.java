@@ -12,9 +12,7 @@ import com.practica02.proyectonpa.Fragments.Frag1;
 import com.practica02.proyectonpa.Fragments.Frag2;
 import com.practica02.proyectonpa.Fragments.Frag3;
 import com.practica02.proyectonpa.Fragments.Frag4;
-import com.practica02.proyectonpa.Fragments.Frag5;
 import com.practica02.proyectonpa.R;
-import com.practica02.proyectonpa.UbicacionActivity;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -42,16 +40,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new Frag1();
                 break;
             case 1:
-                fragment = new Frag3();
+                fragment = new Frag2();
                 break;
             case 2:
-                fragment = new Frag4();
+                fragment = new Frag3();
                 break;
             case 3:
-                fragment = new Frag5();
-                break;
-            case 4:
-                fragment = new Frag2();
+                fragment = new Frag4();
                 break;
         }
         return fragment;

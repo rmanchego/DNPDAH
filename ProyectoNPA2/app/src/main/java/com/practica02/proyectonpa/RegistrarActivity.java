@@ -240,7 +240,7 @@ public class RegistrarActivity extends AppCompatActivity {
                             });
                 }else{
                 Toast.makeText(RegistrarActivity.this,"Validaciones funcionando.", Toast.LENGTH_SHORT).show();
-            }
+                }
             }
         });
         Glide.with(this).load(Constantes.URL_FOTO_POR_DEFECTO_USUARIOS).into(fotoPerfil); //Automaticamente se va a cargar una foto de perfil por defecto

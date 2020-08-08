@@ -1,30 +1,100 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Fragments.Frag2">
+    android:gravity="center_vertical"
+    tools:context=".Controller.ContadorPasos">
 
     <TextView
-        android:id="@+id/editText3"
-        android:layout_width="match_parent"
+        android:id="@+id/headingLabelFrag"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:text="Contador de Pasos"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+
+    <ImageView
+        android:id="@+id/fingerprintImageFrag"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_below="@+id/headingLabelFrag"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/personacaminando" />
+
+
+    <TextView
+        android:id="@+id/id_viewpasosFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fingerprintImageFrag"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"
+        android:padding="10dp"
+        android:hint="0"
+        android:textAlignment="center" />
 
     <Button
-        android:id="@+id/buttonVisita"
-        android:layout_width="match_parent"
-        android:layout_height="81dp"
-        android:layout_weight="1"
-        android:text="Agregar Visita" />
+        android:id="@+id/btnComenzarFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_viewpasosFrag"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:text="Comenzar" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="517dp"
-        android:layout_weight="1" />
-</LinearLayout>
+    <Button
+        android:id="@+id/btnContinuarFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnComenzarFrag"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:text="Continuar" />
+
+    <Button
+        android:id="@+id/btnDetenerFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnContinuarFrag"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:text="Detener" />
+
+    <Button
+        android:id="@+id/btnReiniciarFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDetenerFrag"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:text="Reiniciar" />
+
+    <Button
+        android:id="@+id/btnGuardarFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnReiniciarFrag"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:text="Guardar" />
+
+    <Button
+        android:id="@+id/btnVerHistorialFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnGuardarFrag"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:text="Ver Historial" />
+
+</RelativeLayout>
