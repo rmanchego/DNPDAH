@@ -3,7 +3,9 @@ package com.practica02.proyectonpa;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -54,6 +56,8 @@ import com.practica02.proyectonpa.Controller.Sensores.Acelerometro.Acelerometro;
 import com.practica02.proyectonpa.Controller.Sensores.Acelerometro.ListenerAcelerometro;
 import com.practica02.proyectonpa.Controller.Sensores.Giroscopio.Giroscopio;
 import com.practica02.proyectonpa.Controller.Sensores.Giroscopio.ListenerGiroscopio;
+import com.practica02.proyectonpa.Controller.Sensores.SensorLuz.LightSensor;
+import com.practica02.proyectonpa.Controller.Sensores.SensorLuz.ListenerLightSensor;
 import com.practica02.proyectonpa.Model.Entidades.Firebase.Foto;
 import com.practica02.proyectonpa.Model.Persistencia.FotoDAO;
 
@@ -92,6 +96,7 @@ public class CamaraActivity extends AppCompatActivity {
     // Objetos para usar el sensor giroscopio y acelerómetor
     private Giroscopio giroscopio;
     private Acelerometro acelerometro;
+    private LightSensor sensorLuz;
 
     //Objetos para el calculo del movimiento del celular en base al acelerometro
     private float ejexActualX, ejeActualY, ejeActualZ,lastX,lastY,lastZ;
@@ -119,6 +124,7 @@ public class CamaraActivity extends AppCompatActivity {
             }
         });
         //checkcameras();
+
         init();
         latitud = getIntent().getExtras().getString("latitud");
         longitud = getIntent().getExtras().getString("longitud");
@@ -128,6 +134,7 @@ public class CamaraActivity extends AppCompatActivity {
         //Para reconocer la orientación del dispositivo
         giroscopio = new Giroscopio(this);
         acelerometro = new Acelerometro(this);
+        sensorLuz = new LightSensor(this);
 
     }
 
@@ -191,71 +198,125 @@ public class CamaraActivity extends AppCompatActivity {
             cameraManager.openCamera(cameraId, cameraDeviceCallback, null);
             Log.e(TAG, "Camara abierta");
 
+            //Método para detectar movimiento con ayuda del acelerómetro para detectar que no se realicen movimientos
+            //            //bruscos al momento de tomar una foto
 
+            detectarMovimientoCamara();
 
             //Agregando el reconocimiento al momento de rotar el telefono
-            // En base a la orientación, si se gira de lado izquierdo se abre un toast y nos manda el texto "Orientación Cambiada"
-            // Si se vuelve a girar al lado contrario, se manda el mismo mensaje
-            giroscopio.setListenerGiroscopio(new ListenerGiroscopio() {
-                @Override
-                public void rotando(float ejex, float ejey, float ejez) {
-                    if(ejez > 0.5f){
-                        Toast.makeText(CamaraActivity.this,"Orientación cambiada",Toast.LENGTH_LONG).show();
-                    }else if(ejez <-0.5f){
-                        Toast.makeText(CamaraActivity.this,"Orientación cambiada",Toast.LENGTH_LONG).show();
+            detectarOrientacion();
 
-                    }
-                }
-            });
-
-            //Agregando la detección de movimiento por parte del Acelerómetro para detectar que no se realicen movimientos
-            //bruscos al momento de tomar una foto
-            acelerometro.setListenerAcelerometro(new ListenerAcelerometro() {
-                @Override
-                public void ejes(float ejex, float ejey, float ejez) {
-
-                    //Se aplica un filtrado de datos del sensor acelerómetro con la finalidad de tener una detección de movimiento
-                    //más certera. Es similar al filtro de paso alto, toma los valores bruscos (Aquellos que mandan un "pico" o
-                    //señal alta y luego se le pasa la resta de sus valores abs.
-
-                    //Se guardan los datos del sensor en los temporales ejeActual, para luego utilizarlos en la diferencia del
-                    //último valor menos el primero
-                    ejexActualX = ejex;
-                    ejeActualY = ejey;
-                    ejeActualZ = ejez;
-
-                    //noesPrimeravez se encarga de verificar si se está moviendo el celular, TRUE si lo está haciendo
-                    if(noesPrimeravez){
-
-                        //Valores de los ejes filtrados, difde es el valor final, el filtrado, el cual se usará para
-                        //la comparación entre estos valores y el límite de movimiento establecido en la variable
-                        //limiteDeMovimiento.
-                        difdeX = Math.abs(lastX- ejexActualX);
-                        difdeY = Math.abs(lastY- ejeActualY);
-                        difdeZ = Math.abs(lastZ- ejeActualZ);
-
-                        //Esta condición se encarga de preguntar si el valor filtrado es mayor que el valor establecido como
-                        //límite, si el valor filtrado sobrepasa este valor establecido, entonces se manda un evento, el cual
-                        //es Vibrar, con el objetivo de avisarle al usuario para regular su movimiento y tomar una mejor foto.
-
-                        if((difdeX > limiteDeMovimiento && difdeY > limiteDeMovimiento) ||
-                                (difdeX > limiteDeMovimiento && difdeZ > limiteDeMovimiento)||
-                                (difdeY > limiteDeMovimiento && difdeZ > limiteDeMovimiento)){
-                                vibrar();
-                            Toast.makeText(CamaraActivity.this,"No mueva mucho la cámara para una mejor foto",Toast.LENGTH_LONG).show();
-
-                        }
-
-                    }
-                    lastX = ejexActualX;
-                    lastY = ejeActualY;
-                    lastZ = ejeActualZ;
-                    noesPrimeravez = true;
-                }
-            });
+            //Agregando el método que permite usar el flash automáticamente en un lugar oscuro al momento de tomar una foto
+            detectarIluminosidad();
 
         } catch (Exception e) {
             Log.e(TAG, "No se puede abrir la cámara", e);
+        }
+    }
+
+public void detectarMovimientoCamara(){
+    acelerometro.setListenerAcelerometro(new ListenerAcelerometro() {
+        @Override
+        public void ejes(float ejex, float ejey, float ejez) {
+
+            //Se aplica un filtrado de datos del sensor acelerómetro con la finalidad de tener una detección de movimiento
+            //más certera. Es similar al filtro de paso alto, toma los valores bruscos (Aquellos que mandan un "pico" o
+            //señal alta y luego se le pasa la resta de sus valores abs.
+
+            //Se guardan los datos del sensor en los temporales ejeActual, para luego utilizarlos en la diferencia del
+            //último valor menos el primero
+            ejexActualX = ejex;
+            ejeActualY = ejey;
+            ejeActualZ = ejez;
+
+            //noesPrimeravez se encarga de verificar si se está moviendo el celular, TRUE si lo está haciendo
+            if(noesPrimeravez){
+
+                //Valores de los ejes filtrados, difde es el valor final, el filtrado, el cual se usará para
+                //la comparación entre estos valores y el límite de movimiento establecido en la variable
+                //limiteDeMovimiento.
+                difdeX = Math.abs(lastX- ejexActualX);
+                difdeY = Math.abs(lastY- ejeActualY);
+                difdeZ = Math.abs(lastZ- ejeActualZ);
+
+                //Esta condición se encarga de preguntar si el valor filtrado es mayor que el valor establecido como
+                //límite, si el valor filtrado sobrepasa este valor establecido, entonces se manda un evento, el cual
+                //es Vibrar, con el objetivo de avisarle al usuario para regular su movimiento y tomar una mejor foto.
+
+                if((difdeX > limiteDeMovimiento && difdeY > limiteDeMovimiento) ||
+                        (difdeX > limiteDeMovimiento && difdeZ > limiteDeMovimiento)||
+                        (difdeY > limiteDeMovimiento && difdeZ > limiteDeMovimiento)){
+                    vibrar();
+                   // Toast.makeText(CamaraActivity.this,"No mueva mucho la cámara para una mejor foto",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+            lastX = ejexActualX;
+            lastY = ejeActualY;
+            lastZ = ejeActualZ;
+            noesPrimeravez = true;
+        }
+    });
+}
+
+
+public void detectarOrientacion(){
+    // En base a la orientación, si se gira de lado izquierdo se abre un toast y nos manda el texto "Orientación Cambiada"
+    // Si se vuelve a girar al lado contrario, se manda el mismo mensaje
+    giroscopio.setListenerGiroscopio(new ListenerGiroscopio() {
+        @Override
+        public void rotando(float ejex, float ejey, float ejez) {
+            if(ejez > 0.5f){
+                Toast.makeText(CamaraActivity.this,"Orientación cambiada",Toast.LENGTH_LONG).show();
+            }else if(ejez <-0.5f){
+                Toast.makeText(CamaraActivity.this,"Orientación cambiada",Toast.LENGTH_LONG).show();
+
+            }
+        }
+    });
+}
+
+public void detectarIluminosidad(){
+    sensorLuz.setListenerSensorLuz(new ListenerLightSensor() {
+        @Override
+        public void valorSensorLuz(float valsensorluz) {
+            Toast.makeText(getApplicationContext(),"Valor: " + String.valueOf(valsensorluz), Toast.LENGTH_LONG).show();
+
+            if(valsensorluz<5.0){
+                // Toast.makeText(getApplicationContext(),"Valorssw", Toast.LENGTH_LONG).show();
+                encenderFlash();
+            }else{
+                apagarFlash();
+            }
+        }
+    });
+}
+
+    //Método que nos ayuda a controlar el encendido del flash, se añaden las líneas 294-299 debido a que
+    //API Camera 2 necesita de configuraciones extra para poder realizar el manejo del flash, en la línea
+    //296 se realiza la configuración de uso del flash por medio de FLASH_MODE, y como es el método para
+    //activar el flash, entonces se elige la opción FLASH_MODE_TORCH
+    public void encenderFlash(){
+        mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE,CaptureRequest.FLASH_MODE_TORCH);
+        try {
+            mCaptureSession.setRepeatingRequest(mPreviewCaptureRequest.build(),null,null);
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+        sensorLuz.flashLightOn();
+    }
+
+    //Método que nos ayuda a controlar el apagado del flash, la lógica es la misma que la del método
+    //encenderFlash, este método desactiva el flash que se encuentra encendido utilizando la configuración
+    //FLASH_MODE_OFF.
+
+    public void apagarFlash(){
+        mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE,CaptureRequest.FLASH_MODE_OFF);
+        try {
+            mCaptureSession.setRepeatingRequest(mPreviewCaptureRequest.build(),null,null);
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
         }
     }
 
@@ -307,6 +368,7 @@ public class CamaraActivity extends AppCompatActivity {
             mCamera.createCaptureSession(Arrays.asList(previewSurface, mImageReader.getSurface()),
                     captureSessionCallback,
                     null);
+
 
         } catch (CameraAccessException e) {
             Log.e(TAG, "Camera Access Exception", e);
@@ -425,35 +487,6 @@ public class CamaraActivity extends AppCompatActivity {
         }
     };
 
-    public void checkcameras() {
-        try {
-            CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-
-            String[] cameraIds = cameraManager.getCameraIdList();
-            for (String cameraId : cameraIds) {
-                Log.d(TAG, cameraId);
-                CameraCharacteristics characteristics =
-                        cameraManager.getCameraCharacteristics(cameraId);
-
-                int facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-                if (facing == CameraCharacteristics.LENS_FACING_BACK) {
-                    Log.d(TAG, "back camera");
-                    // back camera
-                } else if (facing == CameraCharacteristics.LENS_FACING_FRONT) {
-                    Log.d(TAG, "front camera");
-                    // front camera
-                } else {
-                    Log.d(TAG, "external camera");
-                    // external cameraCameraCharacteristics.LENS_FACING_EXTERNAL
-                }
-
-            }
-
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -476,6 +509,7 @@ public class CamaraActivity extends AppCompatActivity {
         super.onResume();
         giroscopio.register();
         acelerometro.register();
+        sensorLuz.register();
     }
 
     @Override
@@ -483,6 +517,7 @@ public class CamaraActivity extends AppCompatActivity {
         super.onPause();
         giroscopio.unregister();
         acelerometro.unregister();
+        sensorLuz.unregister();
     }
 
 }

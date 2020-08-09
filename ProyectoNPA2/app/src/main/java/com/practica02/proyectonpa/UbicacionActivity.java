@@ -97,13 +97,16 @@ public class UbicacionActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, "broadcastReceiver is null");
         }
+
         btnirFoto.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UbicacionActivity.this, CamaraActivity.class);
                 intent.putExtra("latitud", txtlatitud.getText().toString());
                 intent.putExtra("longitud", txtlongitud.getText().toString());
                 intent.putExtra("direccion", txtDireccion.getText().toString());
+
                 startActivity(intent);
             }
         });

@@ -23,7 +23,6 @@ import com.practica02.proyectonpa.R;
 public class QrScanner extends AppCompatActivity implements View.OnClickListener{
     Button scanBtn;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +72,7 @@ public class QrScanner extends AppCompatActivity implements View.OnClickListener
             super.onActivityResult(requestCode,resultCode,data);
         }
     }
+
 
 
 }
