@@ -38,7 +38,8 @@ public class UbicacionActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private Button btnirFoto;
     private String direccionCalle;
-
+    private float a = 0.2f;
+    private float latitudLast,longitudLast,latitudFiltrada,longitudFiltrada;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +67,11 @@ public class UbicacionActivity extends AppCompatActivity {
         public void DisplayLocationChange(String latitud, String longitud) {
             //  Log.d(TAG,"Location: "+location);
             //Log.d(TAG,"Latitud: " + latitud);
+
             txtlatitud.setText(latitud);
             txtlongitud.setText(longitud);
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
             try {
                 List<Address> addressList = geocoder.getFromLocation(Double.parseDouble(latitud), Double.parseDouble(longitud), 1);
                 direccionCalle = addressList.get(0).getAddressLine(0);
@@ -81,6 +84,8 @@ public class UbicacionActivity extends AppCompatActivity {
 
         }
     };
+
+
 
     @Override
     protected void onResume() {

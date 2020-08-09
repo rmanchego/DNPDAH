@@ -14,13 +14,14 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
-import android.location.Address;
-import android.location.Geocoder;
 import android.media.Image;
 import android.media.ImageReader;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Surface;
@@ -39,9 +40,7 @@ import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,9 +50,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.practica02.proyectonpa.Controller.Sensores.Acelerometro.Acelerometro;
+import com.practica02.proyectonpa.Controller.Sensores.Acelerometro.ListenerAcelerometro;
+import com.practica02.proyectonpa.Controller.Sensores.Giroscopio.Giroscopio;
+import com.practica02.proyectonpa.Controller.Sensores.Giroscopio.ListenerGiroscopio;
 import com.practica02.proyectonpa.Model.Entidades.Firebase.Foto;
 import com.practica02.proyectonpa.Model.Persistencia.FotoDAO;
-import com.practica02.proyectonpa.Model.Utilidades.Constantes;
 
 public class CamaraActivity extends AppCompatActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -87,6 +89,17 @@ public class CamaraActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
 
+    // Objetos para usar el sensor giroscopio y acelerómetor
+    private Giroscopio giroscopio;
+    private Acelerometro acelerometro;
+
+    //Objetos para el calculo del movimiento del celular en base al acelerometro
+    private float ejexActualX, ejeActualY, ejeActualZ,lastX,lastY,lastZ;
+    private float difdeX, difdeY, difdeZ;
+    private boolean noesPrimeravez;
+    private float limiteDeMovimiento = 0.2f;
+    private Vibrator vibrator;
+//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +123,12 @@ public class CamaraActivity extends AppCompatActivity {
         latitud = getIntent().getExtras().getString("latitud");
         longitud = getIntent().getExtras().getString("longitud");
         dirección = getIntent().getExtras().getString("direccion");
+
+
+        //Para reconocer la orientación del dispositivo
+        giroscopio = new Giroscopio(this);
+        acelerometro = new Acelerometro(this);
+
     }
 
     private void init() {
@@ -171,11 +190,85 @@ public class CamaraActivity extends AppCompatActivity {
             }
             cameraManager.openCamera(cameraId, cameraDeviceCallback, null);
             Log.e(TAG, "Camara abierta");
+
+
+
+            //Agregando el reconocimiento al momento de rotar el telefono
+            // En base a la orientación, si se gira de lado izquierdo se abre un toast y nos manda el texto "Orientación Cambiada"
+            // Si se vuelve a girar al lado contrario, se manda el mismo mensaje
+            giroscopio.setListenerGiroscopio(new ListenerGiroscopio() {
+                @Override
+                public void rotando(float ejex, float ejey, float ejez) {
+                    if(ejez > 0.5f){
+                        Toast.makeText(CamaraActivity.this,"Orientación cambiada",Toast.LENGTH_LONG).show();
+                    }else if(ejez <-0.5f){
+                        Toast.makeText(CamaraActivity.this,"Orientación cambiada",Toast.LENGTH_LONG).show();
+
+                    }
+                }
+            });
+
+            //Agregando la detección de movimiento por parte del Acelerómetro para detectar que no se realicen movimientos
+            //bruscos al momento de tomar una foto
+            acelerometro.setListenerAcelerometro(new ListenerAcelerometro() {
+                @Override
+                public void ejes(float ejex, float ejey, float ejez) {
+
+                    //Se aplica un filtrado de datos del sensor acelerómetro con la finalidad de tener una detección de movimiento
+                    //más certera. Es similar al filtro de paso alto, toma los valores bruscos (Aquellos que mandan un "pico" o
+                    //señal alta y luego se le pasa la resta de sus valores abs.
+
+                    //Se guardan los datos del sensor en los temporales ejeActual, para luego utilizarlos en la diferencia del
+                    //último valor menos el primero
+                    ejexActualX = ejex;
+                    ejeActualY = ejey;
+                    ejeActualZ = ejez;
+
+                    //noesPrimeravez se encarga de verificar si se está moviendo el celular, TRUE si lo está haciendo
+                    if(noesPrimeravez){
+
+                        //Valores de los ejes filtrados, difde es el valor final, el filtrado, el cual se usará para
+                        //la comparación entre estos valores y el límite de movimiento establecido en la variable
+                        //limiteDeMovimiento.
+                        difdeX = Math.abs(lastX- ejexActualX);
+                        difdeY = Math.abs(lastY- ejeActualY);
+                        difdeZ = Math.abs(lastZ- ejeActualZ);
+
+                        //Esta condición se encarga de preguntar si el valor filtrado es mayor que el valor establecido como
+                        //límite, si el valor filtrado sobrepasa este valor establecido, entonces se manda un evento, el cual
+                        //es Vibrar, con el objetivo de avisarle al usuario para regular su movimiento y tomar una mejor foto.
+
+                        if((difdeX > limiteDeMovimiento && difdeY > limiteDeMovimiento) ||
+                                (difdeX > limiteDeMovimiento && difdeZ > limiteDeMovimiento)||
+                                (difdeY > limiteDeMovimiento && difdeZ > limiteDeMovimiento)){
+                                vibrar();
+                            Toast.makeText(CamaraActivity.this,"No mueva mucho la cámara para una mejor foto",Toast.LENGTH_LONG).show();
+
+                        }
+
+                    }
+                    lastX = ejexActualX;
+                    lastY = ejeActualY;
+                    lastZ = ejeActualZ;
+                    noesPrimeravez = true;
+                }
+            });
+
         } catch (Exception e) {
             Log.e(TAG, "No se puede abrir la cámara", e);
         }
     }
 
+    //Método que permite que un dispositivo vibre, en la condición se establece que según la API del dispositivo, en este caso
+    //dispositivo con API's mayor a 26, usarán cierta forma de obtención de la vibración, caso contrario se utilizará otra forma
+    //Esto se hace con la finalidad de abarcar más dispositivos.
+    private void vibrar() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            ((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(250,1));
+        } else {
+            ((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
+        }
+    }
     private CameraDevice.StateCallback cameraDeviceCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(@NonNull CameraDevice camera) {
@@ -374,4 +467,22 @@ public class CamaraActivity extends AppCompatActivity {
             );
         }
     }
+
+    //Reconocer la orientación del dispositivo
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        giroscopio.register();
+        acelerometro.register();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        giroscopio.unregister();
+        acelerometro.unregister();
+    }
+
 }

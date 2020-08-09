@@ -15,8 +15,6 @@ public class LocationBroadcastReceiver extends BroadcastReceiver {
     public static int UNIQUE_ID = 0;
     public static String LOCATION_CHANGE = "location_changed";
     public static String ACTION = "action";
-
-
     public LocationBroadcastReceiver(ObtenerDatosUbicacion mainActivityInf) {
         this.mainActivityInf = mainActivityInf;
 
@@ -29,9 +27,15 @@ public class LocationBroadcastReceiver extends BroadcastReceiver {
             Location location = (Location) intent.getExtras().get(locationChanged);
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
+
+
+           // longitudLast =longitudFiltrada;
+
             Log.d(TAG, latitude + "," + longitude);
             mainActivityInf.DisplayLocationChange(String.valueOf(latitude),String.valueOf(longitude));
             //    mainActivityInf.DisplayLocationChange(latitude + "," + longitude);
         }
     }
+
+
 }
