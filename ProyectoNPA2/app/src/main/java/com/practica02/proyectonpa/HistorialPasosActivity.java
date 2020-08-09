@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,12 @@ public class HistorialPasosActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(PasosViewHolder holder, int position, Pasos model) {
                 holder.getTxtNumeroPasos().setText("" + model.getPasos());
-                holder.getTxtDuracionPasos().setText("00:00:00");
+                long time = model.getDuracion();
+                int h   = (int)(time /3600000);
+                int m = (int)(time - h*3600000)/60000;
+                int s= (int)(time - h*3600000- m*60000)/1000 ;
+                String t = (h < 10 ? "0"+h: h)+":"+(m < 10 ? "0"+m: m)+":"+ (s < 10 ? "0"+s: s);
+                holder.getTxtDuracionPasos().setText(t);
                 holder.getTxtFechaMes().setText(LPasos.obtenerFechaDeRegistro(model.getFecha()));
                 holder.getTxtFechaHora().setText(LPasos.obtenerHoraDeRegistro(model.getFecha()));
             }

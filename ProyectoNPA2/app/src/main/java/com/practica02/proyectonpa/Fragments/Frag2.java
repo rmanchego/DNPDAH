@@ -9,10 +9,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,9 +43,11 @@ public class Frag2 extends Fragment {
     private int contarPasos=0;
     private TextView viewPasos;
     private Button btnComenzar, btnDetener, btnReiniciar,btnContinuar, btnGuardar, btnVerHistorial;
+    private Chronometer cronometro;
     private boolean caminando = false;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
+    long detenerse;
 
     @SuppressLint("ResourceType")
     @Nullable
@@ -52,6 +56,7 @@ public class Frag2 extends Fragment {
         View v = inflater.inflate(R.layout.frag2_layout,container,false);
 
         viewPasos = v.findViewById(R.id.id_viewpasosFrag);
+        cronometro = v.findViewById(R.id.cronometro);
         btnComenzar = v.findViewById(R.id.btnComenzarFrag);
         btnDetener = v.findViewById(R.id.btnDetenerFrag);
         btnReiniciar = v.findViewById(R.id.btnReiniciarFrag);
@@ -63,12 +68,14 @@ public class Frag2 extends Fragment {
         database = FirebaseDatabase.getInstance();
 
 
+
         SensorManager sensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
         final Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         btnComenzar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startCronometro();
                 caminando = true;
                 contarPasos = 0;
                 btnComenzar.setEnabled(false);
@@ -81,6 +88,7 @@ public class Frag2 extends Fragment {
         btnDetener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopCronometro();
                 caminando = false;
                 btnContinuar.setEnabled(true);
                 btnReiniciar.setEnabled(true);
@@ -91,6 +99,7 @@ public class Frag2 extends Fragment {
         btnReiniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                reiniciarCronometro();
                 caminando = false;
                 contarPasos = 0;
                 viewPasos.setText("0");
@@ -104,6 +113,7 @@ public class Frag2 extends Fragment {
         btnContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startCronometro();
                 caminando = true;
                 btnComenzar.setEnabled(false);
                 btnContinuar.setEnabled(false);
@@ -136,6 +146,7 @@ public class Frag2 extends Fragment {
                 Pasos pasos = new Pasos();
                 pasos.setPasos(contarPasos);
                 pasos.setFecha(date2.getTime());
+                pasos.setDuracion((int)(SystemClock.elapsedRealtime()-cronometro.getBase()));
 
                 FirebaseUser currentUser = mAuth.getCurrentUser(); //esto funciona cuando esta registrado correctamente
                 DatabaseReference reference = database.getReference("ContadorPasos/" + currentUser.getUid()+"/"+nombrePasos); //guarda el mismo uid del usuario en la database
@@ -185,6 +196,26 @@ public class Frag2 extends Fragment {
         return v;
     }
 
+    public void startCronometro(){
+        if(!caminando){
+            cronometro.setBase(SystemClock.elapsedRealtime() - detenerse);
+            cronometro.start();
+        }
+    }
+
+    public void stopCronometro(){
+        if (caminando){
+            cronometro.stop();
+            detenerse = SystemClock.elapsedRealtime() - cronometro.getBase();
+        }
+    }
+
+    public void reiniciarCronometro(){
+        cronometro.setBase(SystemClock.elapsedRealtime());
+        detenerse = 0;
+        cronometro.stop();
+    }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -195,7 +226,7 @@ public class Frag2 extends Fragment {
         editor.apply();
     }
 
-    @Override
+        @Override
     public void onStop() {
         super.onStop();
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);

@@ -3,8 +3,10 @@ package com.practica02.proyectonpa.Model.Entidades.Firebase;
 public class Pasos {
     private int pasos;
     private long fecha;
+    private int duracion;
 
-    public Pasos(){
+
+    public Pasos() {
 
     }
 
@@ -24,5 +26,12 @@ public class Pasos {
         this.fecha = fecha;
     }
 
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
 }
 
