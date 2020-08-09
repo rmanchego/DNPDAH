@@ -24,7 +24,6 @@
         android:id="@+id/txtDuracionPasos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Duración"
         android:textStyle="bold"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -37,19 +36,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
+
         <TextView
             android:id="@+id/txtFechaMesPasos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="center"
-            />
+            android:text="Fecha"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtFechaHoraPasos"
