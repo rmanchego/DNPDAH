@@ -34,6 +34,17 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:id="@+id/idHistorialFotos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#ef9a9a"
+        android:text="Obtener tu ubicación"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 
 
 </TableLayout>

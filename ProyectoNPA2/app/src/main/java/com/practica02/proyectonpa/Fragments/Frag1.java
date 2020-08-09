@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.practica02.proyectonpa.HistorialFotosActivity;
 import com.practica02.proyectonpa.MainActivity;
 import com.practica02.proyectonpa.Model.LocationBroadcastReceiver;
 import com.practica02.proyectonpa.R;
@@ -22,6 +23,7 @@ public class Frag1 extends Fragment {
 
     Bundle datos;
     private Button btnir;
+    private Button btnHistorialFotos;
     private float lat, longi;
     private LocationBroadcastReceiver broadcastReceiver;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99; //Variable para el método checkloactionpermission
@@ -39,13 +41,21 @@ public class Frag1 extends Fragment {
       /*  tvUbicacionLatitud = v.findViewById(R.id.txtLatitud);
         tvUbicacionLongitud = v.findViewById(R.id.txtLongitud);*/
 
-
-
         btnir = v.findViewById(R.id.idUbicacionbutton);
+        btnHistorialFotos = v.findViewById(R.id.idHistorialFotos);
+
         btnir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), UbicacionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnHistorialFotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), HistorialFotosActivity.class);
                 startActivity(intent);
             }
         });

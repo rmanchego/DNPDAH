@@ -9,11 +9,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Foto;
+import com.practica02.proyectonpa.Model.Entidades.Firebase.Paciente;
+import com.practica02.proyectonpa.Model.Entidades.Logica.LFoto;
+import com.practica02.proyectonpa.Model.Entidades.Logica.LPaciente;
 import com.practica02.proyectonpa.Model.Utilidades.Constantes;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +28,11 @@ import java.util.Date;
 import java.util.Locale;
 
 public class FotoDAO {
+
+    public interface IDevolverFoto{
+        public void devolverFoto(LFoto lFoto);
+        public void devolverError(String error);
+    }
 
     public interface IDevolverURLFoto{
         public void devolverUrlString(String url);
@@ -43,6 +55,24 @@ public class FotoDAO {
         referenceFotosUbicacionDB = database.getReference(Constantes.NODO_DE_FOTOS_UBICACION);
         referenceFotoDeUbicacionStorage = storage.getReference("Fotos/Ubicacion/" + UsuarioDAO.getInstancia().getKeyUsuario());
     }
+
+    public void obtenerInformacionDeFotoPorLlave(final String key, final FotoDAO.IDevolverFoto iDevolverFoto){
+        referenceFotosUbicacionDB.child(UsuarioDAO.getInstancia().getKeyUsuario()).child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Foto foto = dataSnapshot.getValue(Foto.class);
+                LFoto lFoto = new LFoto(key,foto);
+                iDevolverFoto.devolverFoto(lFoto);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError){
+                iDevolverFoto.devolverError(databaseError.getMessage());
+            }
+        });  //ejecuta una sola vez, no tiene listener por si ocurre cambio
+
+    }
+
 
     public void subirFotoUri(Uri uri, final IDevolverURLFoto iDevolverURLFoto){   //Uri -> foto que se elige con el celular
         String nombreFoto = "";

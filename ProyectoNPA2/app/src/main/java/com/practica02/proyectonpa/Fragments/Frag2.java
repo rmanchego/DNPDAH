@@ -146,7 +146,12 @@ public class Frag2 extends Fragment {
                 Pasos pasos = new Pasos();
                 pasos.setPasos(contarPasos);
                 pasos.setFecha(date2.getTime());
-                pasos.setDuracion((int)(SystemClock.elapsedRealtime()-cronometro.getBase()));
+                long time = (SystemClock.elapsedRealtime()-cronometro.getBase());
+                int h   = (int)(time /3600000);
+                int m = (int)(time - h*3600000)/60000;
+                int s= (int)(time - h*3600000- m*60000)/1000 ;
+                String t = (h < 10 ? "0"+h: h)+":"+(m < 10 ? "0"+m: m)+":"+ (s < 10 ? "0"+s: s);
+                pasos.setDuracion(t);
 
                 FirebaseUser currentUser = mAuth.getCurrentUser(); //esto funciona cuando esta registrado correctamente
                 DatabaseReference reference = database.getReference("ContadorPasos/" + currentUser.getUid()+"/"+nombrePasos); //guarda el mismo uid del usuario en la database

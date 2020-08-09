@@ -8,7 +8,7 @@ public class LFoto {
     private String key;
     private Foto foto;
 
-    public LFoto(String key, Foto usuario) {
+    public LFoto(String key, Foto foto) {
         this.key = key;
         this.foto = foto;
     }

@@ -61,12 +61,7 @@ public class HistorialPasosActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(PasosViewHolder holder, int position, Pasos model) {
                 holder.getTxtNumeroPasos().setText("" + model.getPasos());
-                long time = model.getDuracion();
-                int h   = (int)(time /3600000);
-                int m = (int)(time - h*3600000)/60000;
-                int s= (int)(time - h*3600000- m*60000)/1000 ;
-                String t = (h < 10 ? "0"+h: h)+":"+(m < 10 ? "0"+m: m)+":"+ (s < 10 ? "0"+s: s);
-                holder.getTxtDuracionPasos().setText(t);
+                holder.getTxtDuracionPasos().setText(""+model.getDuracion()+""  );
                 holder.getTxtFechaMes().setText(LPasos.obtenerFechaDeRegistro(model.getFecha()));
                 holder.getTxtFechaHora().setText(LPasos.obtenerHoraDeRegistro(model.getFecha()));
             }
