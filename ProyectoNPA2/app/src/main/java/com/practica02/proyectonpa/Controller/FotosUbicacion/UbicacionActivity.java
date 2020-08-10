@@ -3,6 +3,7 @@ package com.practica02.proyectonpa.Controller.FotosUbicacion;
 import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -15,10 +16,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.practica02.proyectonpa.Controller.MainActivity;
 import com.practica02.proyectonpa.Model.Sensores.GPS.ObtenerDatosUbicacion;
 import com.practica02.proyectonpa.Model.Utilidades.LocationBroadcastReceiver;
 import com.practica02.proyectonpa.R;
@@ -95,19 +98,38 @@ public class UbicacionActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, "broadcastReceiver is null");
         }
+        final AlertDialog.Builder irTomarFoto = new AlertDialog.Builder(UbicacionActivity.this);
+        irTomarFoto.setMessage("Aviso: El dispositivo vibrará si realiza movimiento buscos con el objetivo de avisarle el momento perfecto para una foto de calidad")
+                .setCancelable(false)
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        btnirFoto.setOnClickListener(new View.OnClickListener() {
 
-        btnirFoto.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(UbicacionActivity.this, CamaraActivity.class);
+                                intent.putExtra("latitud", txtlatitud.getText().toString());
+                                intent.putExtra("longitud", txtlongitud.getText().toString());
+                                intent.putExtra("direccion", txtDireccion.getText().toString());
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UbicacionActivity.this, CamaraActivity.class);
-                intent.putExtra("latitud", txtlatitud.getText().toString());
-                intent.putExtra("longitud", txtlongitud.getText().toString());
-                intent.putExtra("direccion", txtDireccion.getText().toString());
+                                startActivity(intent);
+                            }
+                        });
+                        // dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog titulo = irTomarFoto.create();
+        titulo.setTitle("Vibración");
+        titulo.show();
 
-                startActivity(intent);
-            }
-        });
+
 
     }
 

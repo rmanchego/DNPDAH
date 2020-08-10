@@ -67,7 +67,7 @@ public class CamaraActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    //Path para guardar las fotos
+    //Path para guardar las fotos en el dispositivo.
     private final String CARPETA_RAIZ="misImagenesPrueba/";
     private final String RUTA_IMAGEN=CARPETA_RAIZ+"misFotos";
     //
@@ -470,7 +470,7 @@ public void detectarIluminosidad(){
             }
 
             Log.d(TAG, "path:" + outputFile.getAbsolutePath());
-            Toast.makeText(this , outputFile.getAbsolutePath().toString(),Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(this , outputFile.getAbsolutePath().toString(),Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             Log.e(TAG, "File Not Found", e);
         } catch (IOException e) {
