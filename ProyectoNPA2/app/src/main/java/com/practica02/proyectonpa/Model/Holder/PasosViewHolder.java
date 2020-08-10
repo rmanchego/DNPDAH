@@ -14,6 +14,9 @@ import com.practica02.proyectonpa.R;
 
 public class PasosViewHolder extends RecyclerView.ViewHolder {
 
+    //Contenedor para mostrar la lista de los pasos registrados por el doctor a la BD
+    //El contenedor se puede ver en card_view_pasos.xml
+
     private TextView txtNumeroPasos;
     private TextView txtDuracionPasos;
     private TextView txtFechaMes;

@@ -13,6 +13,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HistorialFotosViewHolder extends RecyclerView.ViewHolder{
 
+    //Contenedor para mostrar la lista de fotos tomadas por el usuario
+    //El contenedor se puede ver en card_view_historia_Fotos.xml
+
     private CircleImageView civFoto;
     private TextView txtNombreFoto;
     private LinearLayout layaoutPrincipal;

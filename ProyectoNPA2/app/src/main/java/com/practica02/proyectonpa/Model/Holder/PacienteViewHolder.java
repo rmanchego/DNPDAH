@@ -14,6 +14,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PacienteViewHolder extends RecyclerView.ViewHolder {
 
+    //Contenedor para mostrar la lista de los pacientes registrados por el doctor a la BD
+    //El contenedor se puede ver en card_view_paciente.xml
+
     private CircleImageView civFotoPerfil;
     private TextView txtNombreUsuario;
     private RelativeLayout layaoutPrincipal;
