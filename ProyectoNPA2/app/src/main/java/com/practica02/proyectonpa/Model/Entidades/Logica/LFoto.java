@@ -5,8 +5,8 @@ import com.practica02.proyectonpa.Model.Entidades.Firebase.Foto;
 
 public class LFoto {
 
-    private String key;
-    private Foto foto;
+    private String key; //Nombre del Nodo en la BD
+    private Foto foto; //Referencia a la clase Foto
 
     public LFoto(String key, Foto foto) {
         this.key = key;

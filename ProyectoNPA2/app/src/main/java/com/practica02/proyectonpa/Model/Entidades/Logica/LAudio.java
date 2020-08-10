@@ -4,8 +4,8 @@ import com.practica02.proyectonpa.Model.Entidades.Firebase.Audio;
 
 public class LAudio {
 
-    private String key;
-    private Audio audio;
+    private String key; //Nombre del Nodo en la BD
+    private Audio audio; //Referencia a la clase Audio
 
     public LAudio(String key, Audio audio){
         this.key = key;

@@ -8,8 +8,8 @@ import java.util.Locale;
 
 public class LPaciente {
 
-    private String key;
-    private Paciente paciente;
+    private String key; //Nombre del Nodo en la BD
+    private Paciente paciente; //Referencia a la clase Paciente
 
     public LPaciente(String key, Paciente paciente){
         this.key = key;
@@ -32,12 +32,14 @@ public class LPaciente {
         this.paciente = paciente;
     }
 
+    //Metodo que transforma un objeto long a un String con formato Dia/Mes/Año
     public static String obtenerFechaDeNacimiento(long fecha){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date date = new Date(fecha);
         return simpleDateFormat.format(date);
     }
 
+    //Metodo que devuelve un String para generar el mensaje que se usara en el codigo QR
     public static String getReporte(Paciente paciente){
         return "Nombre: " + paciente.getNombre() + "\nFecha de Nacimiento: " +
                 obtenerFechaDeNacimiento(paciente.getFechaDeNacimiento()) +

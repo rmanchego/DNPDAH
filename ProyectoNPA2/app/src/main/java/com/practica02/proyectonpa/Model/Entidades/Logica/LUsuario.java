@@ -9,8 +9,8 @@ import java.util.Locale;
 
 public class LUsuario {
 
-    private String key;
-    private Usuario usuario;
+    private String key; //Nombre del Nodo en la BD
+    private Usuario usuario; //Referencia a la clase Usuario
 
     public LUsuario(String key, Usuario usuario) {
         this.key = key;
@@ -33,18 +33,21 @@ public class LUsuario {
         this.usuario = usuario;
     }
 
+    //Metodo para obtener la Fecha de creacion en la BD con el formato Dia/Mes/Año
     public String obtenerFechaDeCreacion(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date date = new Date(UsuarioDAO.getInstancia().fechaDeCreacionLong());
         return simpleDateFormat.format(date);
     }
 
+    //Metodo para obtener la Fecha de ultimo Logueo a la app con el formato Dia/Mes/Año
     public String obtenerFechaDeUltimaVezQueSeLogeo(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date date = new Date(UsuarioDAO.getInstancia().fechaDeUltimaVezQueSeLogeoLong());
         return simpleDateFormat.format(date);
     }
 
+    //Metodo para obtener la Fecha de nacimiento con el formato Dia/Mes/Año
     public static String obtenerFechaDeNacimiento(long fecha){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date date = new Date(fecha);
