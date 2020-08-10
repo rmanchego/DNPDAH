@@ -9,6 +9,7 @@
         android:id="@+id/BotonesFrag3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
         <Button
@@ -17,6 +18,10 @@
             android:layout_height="wrap_content"
             android:text="Escanear QR"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/borde_redondo"
             />
 
         <Button
@@ -25,6 +30,10 @@
             android:layout_height="wrap_content"
             android:text="Agregar QR"
             android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/borde_redondo"
             />
 
     </LinearLayout>

@@ -46,9 +46,11 @@
         android:text="Ingresar"
         android:layout_below="@id/idcontraseñaLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="120dp"
         android:layout_marginRight="120dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/borde_redondo"
         />
 
     <Button
@@ -61,6 +63,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="120dp"
         android:layout_marginRight="120dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/borde_redondo"
         />
 
 </RelativeLayout>
