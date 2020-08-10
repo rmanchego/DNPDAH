@@ -296,9 +296,11 @@ public class AgregarPacienteQRActivity extends AppCompatActivity {
                              }
                          });
 
+                     }else{
+                         Toast.makeText(AgregarPacienteQRActivity.this,"Se debe agregar una foto.", Toast.LENGTH_SHORT).show();
                      }
                 } else {
-                    Toast.makeText(AgregarPacienteQRActivity.this,"Validaciones funcionando.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarPacienteQRActivity.this,"Faltan datos por agregar.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

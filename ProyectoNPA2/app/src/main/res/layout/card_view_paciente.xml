@@ -1,6 +1,4 @@
 
-
-
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -19,22 +17,37 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civFotoPerfil"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/txtTituloNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de Usuario"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@id/civFotoPerfil"
+            android:layout_toEndOf="@id/civFotoPerfil"
+            />
 
         <TextView
             android:id="@+id/txtNombreUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DNPAH"
-            android:textStyle="bold"
-            android:textColor="#000"
-            android:textSize="22sp"
+            android:text="DNPDAH"
+            android:textColor="#a9a9a9"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_toRightOf="@id/civFotoPerfil"
             android:layout_toEndOf="@id/civFotoPerfil"
+            android:layout_below="@id/txtTituloNombreUsuario"
             />
     </RelativeLayout>
 

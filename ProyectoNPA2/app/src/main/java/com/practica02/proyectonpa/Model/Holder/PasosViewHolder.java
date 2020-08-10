@@ -3,6 +3,7 @@ package com.practica02.proyectonpa.Model.Holder;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ public class PasosViewHolder extends RecyclerView.ViewHolder {
     private TextView txtDuracionPasos;
     private TextView txtFechaMes;
     private TextView txtFechaHora;
-    private LinearLayout layaoutPrincipal;
+    private RelativeLayout layaoutPrincipal;
 
     public PasosViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -60,11 +61,11 @@ public class PasosViewHolder extends RecyclerView.ViewHolder {
         this.txtFechaHora = txtFechaHora;
     }
 
-    public LinearLayout getLayaoutPrincipal() {
+    public RelativeLayout getLayaoutPrincipal() {
         return layaoutPrincipal;
     }
 
-    public void setLayaoutPrincipal(LinearLayout layaoutPrincipal) {
+    public void setLayaoutPrincipal(RelativeLayout layaoutPrincipal) {
         this.layaoutPrincipal = layaoutPrincipal;
     }
 }
