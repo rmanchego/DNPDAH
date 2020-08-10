@@ -6,7 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".Controller.FotosUbicacion.UbicacionActivity">
 
+    <TextView
+        android:id="@+id/t_text"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
 
+        android:drawSelectorOnTop="true"
+        android:ems="10"
+        android:layout_margin="10dp"
+        android:inputType="textMultiLine"
+        android:longClickable="true"
+        android:scrollbars="vertical"
+        android:text="Tu Ubicación"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="italic|bold"
+        android:typeface="serif" />
 
     <TableRow
         android:layout_height="wrap_content"
@@ -64,11 +80,13 @@
     <Button
         android:id="@+id/btnirFoto"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:layout_height="wrap_content"
         android:drawableRight="@mipmap/icon_camara"
+        android:background="@drawable/borde_redondo"
         android:drawablePadding="8dp"
         android:textColor="@android:color/white"
-        app:backgroundTint="#ef9a9a"
         android:text="Tomar Foto"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />

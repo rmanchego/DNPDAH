@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
     tools:context=".Controller.FotosUbicacion.CamaraActivity">
 
 <include
@@ -36,6 +37,8 @@
     <Button
         android:id="@+id/btnTakePicture"
         android:text="Tomar Foto"
+        android:background="@drawable/borde_redondo"
+        android:textColor="#fff"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
