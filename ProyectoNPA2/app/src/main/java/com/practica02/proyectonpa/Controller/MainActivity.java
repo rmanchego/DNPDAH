@@ -142,8 +142,32 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.item_logout:
-                FirebaseAuth.getInstance().signOut();
-                returnLogin();
+                final AlertDialog.Builder salir = new AlertDialog.Builder(MainActivity.this);
+                salir.setMessage("Desea salir del aplicativo?")
+                        .setCancelable(false)
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseAuth.getInstance().signOut();
+                                returnLogin();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog avisoLogOut = salir.create();
+                avisoLogOut.setTitle("LogOut");
+                avisoLogOut.show();
+
+
+
+
+
+
+
                 return true;
 
         }
