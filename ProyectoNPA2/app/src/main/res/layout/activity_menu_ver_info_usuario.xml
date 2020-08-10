@@ -4,38 +4,41 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="10sp">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:padding="10sp"
+    android:background="@drawable/fondo_login">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@drawable/login_transparante">
+
+            <TextView
+                android:id="@+id/perfilagregarpacientetitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Información del usuario"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_centerHorizontal="true"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/fotoPerfilPerfil"
                 android:layout_width="150sp"
                 android:layout_height="150sp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Informacion del Usuario"
-                    android:textSize="18sp"
-                    android:padding="5sp"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,13 +51,17 @@
                     android:hint="Nombre"
                     android:padding="5sp"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColorHint="#FFFFFF"
+                    />
 
                 <TextView
                     android:id="@+id/idPerfilNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre"
+                    android:hint=""
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:padding="5sp"/>
 
@@ -70,13 +77,17 @@
                     android:hint="Correo"
                     android:textSize="18sp"
                     android:padding="5sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColorHint="#FFFFFF"
+                    />
 
                 <TextView
                     android:id="@+id/idPerfilCorreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Correo"
+                    android:hint=""
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:padding="5sp"/>
 
@@ -114,14 +125,18 @@
                     android:hint="F. Nacimiento"
                     android:textSize="18sp"
                     android:padding="5sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColorHint="#FFFFFF"
+                    />
 
                 <TextView
                     android:id="@+id/txtPerfilFechaDeNacimiento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Fecha de Nacimiento"
+                    android:hint=""
                     android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
                     android:padding="5sp"/>
 
             </LinearLayout>
@@ -136,18 +151,22 @@
                     android:hint="Genero"
                     android:textSize="18sp"
                     android:padding="5sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColorHint="#FFFFFF"
+                    />
 
                 <TextView
                     android:id="@+id/txtPerfilGenero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Genero"
+                    android:hint=""
                     android:textSize="18sp"
-                    android:padding="5sp"/>
+                    android:padding="5sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    />
 
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
 </LinearLayout>
