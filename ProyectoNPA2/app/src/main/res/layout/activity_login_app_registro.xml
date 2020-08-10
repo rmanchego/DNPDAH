@@ -4,102 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    tools:context=".Controller.LoginApp.RegistrarActivity">
+    tools:context=".Controller.LoginApp.RegistrarActivity"
+    android:background="#FDFFFC">
 
-
-    <TextView
-        android:id="@+id/RegistrarTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:padding="7sp"
-        android:text="Registro Usuario"
-        />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/fotoPerfil"
-        android:layout_width="150sp"
-        android:layout_height="150sp"
-        android:layout_below="@id/RegistrarTitulo"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher"/>
-
-    <EditText
-        android:id="@+id/idRegistroNombre"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/fotoPerfil"
-        android:hint="Nombre y Apellido" />
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        >
 
-    <EditText
-        android:id="@+id/idRegistroCorreo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/idRegistroNombre"
-        android:hint="Correo"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/idRegistroContraseña"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/idRegistroCorreo"
-        android:hint="Contraseña"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/idRegistroContraseñaRepetida"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/idRegistroContraseña"
-        android:hint="Repetir contraseña"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/txtFechaDeNacimiento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/idRegistroContraseñaRepetida"
-        android:hint="Fecha de Nacimiento"
-        android:inputType="date"
-        android:clickable="true"
-        android:focusable="false"/>
-
-    <RadioGroup
-        android:id="@+id/rgGenero"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtFechaDeNacimiento"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/rdHombre"
+        <TextView
+            android:id="@+id/RegistrarTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Hombre"
-            android:layout_weight="1"
-            android:checked="true"/>
-        <RadioButton
-            android:id="@+id/rdMujer"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:padding="7sp"
+            android:text="Registro Usuario"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoPerfil"
+            android:layout_width="150sp"
+            android:layout_height="150sp"
+            android:layout_below="@id/RegistrarTitulo"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher"/>
+
+        <EditText
+            android:id="@+id/idRegistroNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/fotoPerfil"
+            android:hint="Nombre y Apellido" />
+
+        <EditText
+            android:id="@+id/idRegistroCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idRegistroNombre"
+            android:hint="Correo"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/idRegistroContraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idRegistroCorreo"
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/idRegistroContraseñaRepetida"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/idRegistroContraseña"
+            android:hint="Repetir contraseña"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/txtFechaDeNacimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/idRegistroContraseñaRepetida"
+            android:hint="Fecha de Nacimiento"
+            android:inputType="date"
+            android:clickable="true"
+            android:focusable="false"/>
+
+        <RadioGroup
+            android:id="@+id/rgGenero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtFechaDeNacimiento"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rdHombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Hombre"
+                android:layout_weight="1"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/rdMujer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Mujer"
+                android:layout_weight="1"/>
+        </RadioGroup>
+
+            <Button
+            android:id="@+id/idRegistroRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Mujer"
-            android:layout_weight="1"/>
-    </RadioGroup>
+            android:layout_below="@+id/rgGenero"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:hint="Registrar"
+            android:textColorHint="#FFFFFF"
+            android:background="@drawable/borde_redondo"
+            />
 
-    <Button
-        android:id="@+id/idRegistroRegistrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rgGenero"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Registrar"/>
 
+    </RelativeLayout>
 
 </RelativeLayout>
