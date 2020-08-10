@@ -95,6 +95,7 @@ public class CamaraActivity extends AppCompatActivity {
     private Giroscopio giroscopio;
     private Acelerometro acelerometro;
     private LightSensor sensorLuz;
+    private boolean flashEncendido;
 
     //Objetos para el calculo del movimiento del celular en base al acelerometro
     private float ejexActualX, ejeActualY, ejeActualZ,lastX,lastY,lastZ;
@@ -303,6 +304,7 @@ public void detectarIluminosidad(){
             e.printStackTrace();
         }
         sensorLuz.flashLightOn();
+        flashEncendido=true;
     }
 
     //Método que nos ayuda a controlar el apagado del flash, la lógica es la misma que la del método
@@ -316,6 +318,7 @@ public void detectarIluminosidad(){
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+        flashEncendido=false;
     }
 
     //Método que permite que un dispositivo vibre, en la condición se establece que según la API del dispositivo, en este caso
