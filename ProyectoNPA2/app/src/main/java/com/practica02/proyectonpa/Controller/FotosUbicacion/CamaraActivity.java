@@ -29,6 +29,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -105,12 +106,14 @@ public class CamaraActivity extends AppCompatActivity {
     private Vibrator vibrator;
 //
 
+    private TextView valorIluminosidad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foto_ubicacion_camara);
         verifyStoragePermissions(this);
-
+        valorIluminosidad = (TextView)(findViewById(R.id.id_iluminosidad));
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
@@ -280,12 +283,11 @@ public void detectarIluminosidad(){
     sensorLuz.setListenerSensorLuz(new ListenerLightSensor() {
         @Override
         public void valorSensorLuz(float valsensorluz) {
-            Toast.makeText(getApplicationContext(),"Valor: " + String.valueOf(valsensorluz), Toast.LENGTH_LONG).show();
-
+         //   Toast.makeText(getApplicationContext(),"Valor: " + String.valueOf(valsensorluz), Toast.LENGTH_LONG).show();
+            valorIluminosidad.setText(String.valueOf(valsensorluz));
             if(valsensorluz<5.0){
-                // Toast.makeText(getApplicationContext(),"Valorssw", Toast.LENGTH_LONG).show();
+                 Toast.makeText(getApplicationContext(),"Flash automático activado", Toast.LENGTH_LONG).show();
                 encenderFlash();
-
             }else{
                 apagarFlash();
             }
@@ -298,8 +300,7 @@ public void detectarIluminosidad(){
     //296 se realiza la configuración de uso del flash por medio de FLASH_MODE, y como es el método para
     //activar el flash, entonces se elige la opción FLASH_MODE_TORCH
     public void encenderFlash(){
-        mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_TORCH);
-        mPreviewCaptureRequest.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON);
+        mPreviewCaptureRequest.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_ALWAYS_FLASH);
      //   mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE,CaptureRequest.FLA);
         try {
             mCaptureSession.setRepeatingRequest(mPreviewCaptureRequest.build(),null,null);
