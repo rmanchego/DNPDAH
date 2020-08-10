@@ -20,6 +20,7 @@ import java.util.Locale;
 
 public class AudioDAO {
 
+    //Interfaz para devolver la URL del Audio
     public interface IDevolverURLAudio{
         public void devolverUrlString(String url);
     }
@@ -30,11 +31,13 @@ public class AudioDAO {
     private DatabaseReference referenceAudio;
     private StorageReference referenceAudioStorage;
 
+    //Patron singleton para instanciar una vez la clase AudioDAO
     public static AudioDAO getInstancia(){
         if(audioDAO==null) audioDAO = new AudioDAO();
         return audioDAO;
     }
 
+    //Constructor donde se obtiene las referencias de los nodos del audio de la BD y del Storage de Firebase
     private AudioDAO(){
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -42,27 +45,32 @@ public class AudioDAO {
         referenceAudioStorage = storage.getReference("Audio/" + UsuarioDAO.getInstancia().getKeyUsuario());
     }
 
-    public void subirAudioUri(Uri uri, final IDevolverURLAudio iDevolverURLAudio){   //Uri -> foto que se elige con el celular
+    //Metodo para Subir un archivo audio al Storage de Firebase
+    public void subirAudioUri(Uri uri, final IDevolverURLAudio iDevolverURLAudio){
+        //Se obtiene la fecha actual que sera el nombre del archivo audio que se almacenara en el storage de Firebase
         String nombreAudio = "";
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("SSS.ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
         nombreAudio = simpleDateFormat.format(date);
+
+        //Moverse al nodo Audio
         final StorageReference audioReferencia = referenceAudioStorage.child(nombreAudio);
-        //Uri u = taskSnapshot.getDownloadUrl();
+
+        //Metodo de FireBase para guardar un archivo en el storage
         audioReferencia.putFile(uri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                 if(!task.isSuccessful()){
                     throw task.getException(); //throw -> llama a la excepcion
                 }
-                return audioReferencia.getDownloadUrl(); //Si se eligio una foto y se subio a la BD, agarra la url del archivo
+                return audioReferencia.getDownloadUrl(); //Si se subio el audio a la BD, se obtiene la url del archivo
             }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {  //este metodo captura la url de la foto
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {  //este metodo captura la url del audio
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 if(task.isSuccessful()){
-                    Uri uri = task.getResult(); //url de la foto que se sube a la BS
-                    iDevolverURLAudio.devolverUrlString(uri.toString());
+                    Uri uri = task.getResult(); //url del audio que se subio a la BD
+                    iDevolverURLAudio.devolverUrlString(uri.toString());    //Metodo de la interfaz que se creo para devolver la URL del audio
                 }
             }
         });

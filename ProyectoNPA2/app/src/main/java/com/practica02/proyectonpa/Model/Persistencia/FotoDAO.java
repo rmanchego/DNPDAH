@@ -29,11 +29,13 @@ import java.util.Locale;
 
 public class FotoDAO {
 
+    //Interfaz para devolver un objeto Foto
     public interface IDevolverFoto{
         public void devolverFoto(LFoto lFoto);
         public void devolverError(String error);
     }
 
+    //Interfaz para devolver la URL de la Foto
     public interface IDevolverURLFoto{
         public void devolverUrlString(String url);
     }
@@ -44,11 +46,13 @@ public class FotoDAO {
     private DatabaseReference referenceFotosUbicacionDB;
     private StorageReference referenceFotoDeUbicacionStorage;
 
+    //Patron singleton para instanciar una vez la clase FotoDAO
     public static FotoDAO getInstancia(){
         if(fotoDAO==null) fotoDAO = new FotoDAO();
         return fotoDAO;
     }
 
+    //Constructor donde se obtiene las referencias de los nodos de la Foto de la BD y del Storage de Firebase
     private FotoDAO(){
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -56,12 +60,17 @@ public class FotoDAO {
         referenceFotoDeUbicacionStorage = storage.getReference("Fotos/Ubicacion/" + UsuarioDAO.getInstancia().getKeyUsuario());
     }
 
+    //Metodo para obtener los datos de un foto almacenados en la BD a travez de una KEY
     public void obtenerInformacionDeFotoPorLlave(final String key, final FotoDAO.IDevolverFoto iDevolverFoto){
+        //Se navega a travez de los nodos de la BD para llegar al nodo que deseamos a travez de la clave
         referenceFotosUbicacionDB.child(UsuarioDAO.getInstancia().getKeyUsuario()).child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Se transforma los datos de la BD a un objeto Foto
                 Foto foto = dataSnapshot.getValue(Foto.class);
+                //Se almacena en un objeto LFoto que tiene la clave y los datos de la foto
                 LFoto lFoto = new LFoto(key,foto);
+                //Metodo de la interfaz que se creo para devolver un objeto LFoto
                 iDevolverFoto.devolverFoto(lFoto);
             }
 
@@ -73,28 +82,32 @@ public class FotoDAO {
 
     }
 
-
-    public void subirFotoUri(Uri uri, final IDevolverURLFoto iDevolverURLFoto){   //Uri -> foto que se elige con el celular
+    //Metodo para Subir un archivo foto al Storage de Firebase
+    public void subirFotoUri(Uri uri, final IDevolverURLFoto iDevolverURLFoto){
+        //Se obtiene la fecha actual que sera el nombre del archivo foto que se almacenara en el storage de Firebase
         String nombreFoto = "";
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("SSS.ss-mm-hh-dd-MM-yyyy", Locale.getDefault());  //Guardar en Firebase por fecha
         nombreFoto = simpleDateFormat.format(date);
+
+        //Moverse al nodo Foto
         final StorageReference fotoReferencia = referenceFotoDeUbicacionStorage.child(nombreFoto);
-        //Uri u = taskSnapshot.getDownloadUrl();
+
+        //Metodo de FireBase para guardar un archivo en el storage
         fotoReferencia.putFile(uri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                 if(!task.isSuccessful()){
                     throw task.getException(); //throw -> llama a la excepcion
                 }
-                return fotoReferencia.getDownloadUrl(); //Si se eligio una foto y se subio a la BD, agarra la url del archivo
+                return fotoReferencia.getDownloadUrl(); //Si se subio la foto a la BD, agarra la url del archivo
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {  //este metodo captura la url de la foto
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 if(task.isSuccessful()){
                     Uri uri = task.getResult(); //url de la foto que se sube a la BS
-                    iDevolverURLFoto.devolverUrlString(uri.toString());
+                    iDevolverURLFoto.devolverUrlString(uri.toString()); //Metodo de la interfaz que se creo para devolver la URL de la foto
                 }
             }
         });
