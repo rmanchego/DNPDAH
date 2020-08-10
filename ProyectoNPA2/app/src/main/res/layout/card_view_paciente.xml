@@ -8,12 +8,14 @@
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
     android:gravity="center">
+
     <RelativeLayout
         android:id="@+id/layaoutPrincipal2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         >
+
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civFotoPerfil"

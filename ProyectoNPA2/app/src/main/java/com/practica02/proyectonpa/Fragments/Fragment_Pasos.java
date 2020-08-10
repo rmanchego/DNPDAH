@@ -37,6 +37,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
+
 import static android.content.Context.SENSOR_SERVICE;
 
 public class Fragment_Pasos extends Fragment {
@@ -51,6 +54,9 @@ public class Fragment_Pasos extends Fragment {
     private FirebaseDatabase database;
     long detenerse;
 
+    private GifImageView personacaminando;
+
+    private GifDrawable gifDrawable;
     @SuppressLint("ResourceType")
     @Nullable
     @Override
@@ -66,10 +72,16 @@ public class Fragment_Pasos extends Fragment {
         btnGuardar = v.findViewById(R.id.btnGuardarFrag);
         btnVerHistorial = v.findViewById(R.id.btnVerHistorialFrag);
 
+        personacaminando = v.findViewById(R.id.personaCaminando);
+
+
+        gifDrawable = (GifDrawable) personacaminando.getDrawable();
+
         btnEnabled(btnDetener,false);
         btnEnabled(btnReiniciar,false);
         btnEnabled(btnContinuar,false);
         btnEnabled(btnGuardar,false);
+        gifDrawable.stop();
 
 
 
@@ -84,10 +96,10 @@ public class Fragment_Pasos extends Fragment {
         btnComenzar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                gifDrawable.start();
                 startCronometro();
                 caminando = true;
                 contarPasos = 0;
-
                 btnEnabled(btnComenzar, false);
                 btnEnabled(btnContinuar, false);
                 btnEnabled(btnDetener, true);
@@ -101,7 +113,7 @@ public class Fragment_Pasos extends Fragment {
             public void onClick(View v) {
                 stopCronometro();
                 caminando = false;
-
+                gifDrawable.stop();
                 btnEnabled(btnContinuar, true);
                 btnEnabled(btnReiniciar, true);
                 btnEnabled(btnGuardar, true);
@@ -116,7 +128,7 @@ public class Fragment_Pasos extends Fragment {
                 caminando = false;
                 contarPasos = 0;
                 viewPasos.setText("0");
-
+                gifDrawable.stop();
                 btnEnabled(btnComenzar, true);
                 btnEnabled(btnContinuar, false);
                 btnEnabled(btnDetener, false);
@@ -130,7 +142,7 @@ public class Fragment_Pasos extends Fragment {
             public void onClick(View v) {
                 startCronometro();
                 caminando = true;
-
+                gifDrawable.start();
                 btnEnabled(btnComenzar, false);
                 btnEnabled(btnContinuar, false);
                 btnEnabled(btnDetener, true);
