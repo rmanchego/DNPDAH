@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -83,6 +84,8 @@ public class Fragment_Pasos extends Fragment {
                 btnDetener.setEnabled(true);
                 btnReiniciar.setEnabled(true);
                 btnGuardar.setEnabled(false);
+                btnGuardar.setBackgroundColor(Color.rgb(0,0,0));
+
             }
         });
         btnDetener.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +96,7 @@ public class Fragment_Pasos extends Fragment {
                 btnContinuar.setEnabled(true);
                 btnReiniciar.setEnabled(true);
                 btnGuardar.setEnabled(true);
+
             }
         });
 

@@ -25,40 +25,10 @@
             android:layout_margin="10dp"
             android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="N° Pasos"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:layout_weight="1"
-                android:gravity="center"
-                />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Duración"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:layout_weight="1"
-                android:gravity="center"
-                />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fecha"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                />
+
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
