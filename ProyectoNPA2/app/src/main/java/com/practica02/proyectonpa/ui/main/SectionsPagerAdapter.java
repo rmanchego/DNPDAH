@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.practica02.proyectonpa.Fragments.Frag1;
-import com.practica02.proyectonpa.Fragments.Frag2;
-import com.practica02.proyectonpa.Fragments.Frag3;
-import com.practica02.proyectonpa.Fragments.Frag4;
+import com.practica02.proyectonpa.Fragments.Fragment_Fotos;
+import com.practica02.proyectonpa.Fragments.Fragment_Pasos;
+import com.practica02.proyectonpa.Fragments.Fragment_CodigoQR;
+import com.practica02.proyectonpa.Fragments.Fragment_Sensores;
 import com.practica02.proyectonpa.R;
 
 /**
@@ -37,16 +37,16 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position){
             case 0:
-                fragment = new Frag1();
+                fragment = new Fragment_Fotos();
                 break;
             case 1:
-                fragment = new Frag2();
+                fragment = new Fragment_Pasos();
                 break;
             case 2:
-                fragment = new Frag3();
+                fragment = new Fragment_CodigoQR();
                 break;
             case 3:
-                fragment = new Frag4();
+                fragment = new Fragment_Sensores();
                 break;
         }
         return fragment;

@@ -32,16 +32,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VerFotoDeHistorialActivity"></activity>
-        <activity android:name=".HistorialFotosActivity" />
-        <activity android:name=".PerfilPacienteActivity" />
-        <activity android:name=".AgregarPacienteQRActivity" />
-        <activity android:name=".HistorialPasosActivity" />
-        <activity android:name=".CamaraActivity" />
-        <activity android:name=".UbicacionActivity" />
-        <activity android:name=".VerInfoUsuario" />
-        <activity android:name=".MicrofonoActivity" />
-        <activity android:name=".Controller.Orientacion" />
+        <activity android:name=".Controller.FotosUbicacion.VerFotoDeHistorialActivity"></activity>
+        <activity android:name=".Controller.FotosUbicacion.HistorialFotosActivity" />
+        <activity android:name=".Controller.ScannerQR.PerfilPacienteActivity" />
+        <activity android:name=".Controller.ScannerQR.AgregarPacienteQRActivity" />
+        <activity android:name=".Controller.Pasos.HistorialPasosActivity" />
+        <activity android:name=".Controller.FotosUbicacion.CamaraActivity" />
+        <activity android:name=".Controller.FotosUbicacion.UbicacionActivity" />
+        <activity android:name=".Controller.Menu.VerInfoUsuario" />
+        <activity android:name=".Controller.Menu.MicrofonoActivity" />
+        <activity android:name=".Controller.PruebaSensores.PruebasSensoresActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -54,32 +54,30 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".RegistrarActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Controller.LoginApp.RegistrarActivity" />
+        <activity android:name=".Controller.LoginApp.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controller.ContadorPasos" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Controller.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AgregarVisita" />
         <activity
-            android:name=".Controller.IngresoHuella"
+            android:name=".Controller.LoginApp.IngresoHuellaActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Controller.QrScanner" />
+        <activity android:name=".Controller.ScannerQR.QrScannerActivity" />
         <activity
-            android:name=".Model.CapturarActivity"
+            android:name=".Model.Utilidades.CapturarActivity"
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <receiver
-            android:name=".Model.LocationBroadcastReceiver"
+            android:name=".Model.Utilidades.LocationBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.location.LocationManager.KEY_LOCATION_CHANGED" />

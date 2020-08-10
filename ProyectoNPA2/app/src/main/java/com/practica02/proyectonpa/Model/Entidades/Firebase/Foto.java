@@ -7,6 +7,8 @@ public class Foto {
     private String latitud;
     private String longitud;
 
+    private String valorLuz;
+
     public Foto(){
 
     }
@@ -52,4 +54,14 @@ public class Foto {
     public void setLongitud(String longitud) {
         this.longitud = longitud;
     }
+
+
+    public String getValorLuz() {
+        return valorLuz;
+    }
+
+    public void setValorLuz(String valorLuz) {
+        this.valorLuz = valorLuz;
+    }
+
 }
