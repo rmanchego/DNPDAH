@@ -188,7 +188,7 @@ public class RegistrarActivity extends AppCompatActivity {
                 final String nombre = txtNombre.getText().toString();
                 if(isValidEmail(correo) && validarContraseña() && validarNombre(nombre)) {
                     String contraseña = txtContraseña.getText().toString();
-                    mAuth.createUserWithEmailAndPassword(correo, nombre)
+                    mAuth.createUserWithEmailAndPassword(correo, contraseña)
                             .addOnCompleteListener(RegistrarActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {

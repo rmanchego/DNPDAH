@@ -35,6 +35,7 @@ public class QrScannerActivity extends AppCompatActivity implements View.OnClick
         integrator.setOrientationLocked(false);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         integrator.setPrompt("Scanneando el código");
+
         integrator.initiateScan();
 
     }

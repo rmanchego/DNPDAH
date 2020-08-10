@@ -39,6 +39,7 @@ dependencies {
 
     //Diseño
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
 
     //Firebase
     implementation 'com.google.firebase:firebase-database:19.2.0' //Base de Datos

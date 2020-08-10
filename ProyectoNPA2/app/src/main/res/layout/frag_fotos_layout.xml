@@ -6,22 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".Controller.FotosUbicacion.UbicacionActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:src="@drawable/servicioubicacion"
-        android:layout_weight="2"/>
 
-    <TableRow android:padding="10dip"
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="wrap_content"
+        android:layout_weight="2"
+        android:layout_height="200dp"
+        android:src="@drawable/mapa_gif" />
+
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp">
+        android:layout_marginRight="50dp"
+        android:gravity="center"
+        android:padding="10dip">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:text="Aqui describiriamos lo que se debe hacer, algo así, y en la imagen sería poner un video de como usar, algo así." />
+            android:id="@+id/t_text"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
 
-
+            android:drawSelectorOnTop="true"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:longClickable="true"
+            android:scrollbars="vertical"
+            android:text="Obtenga su ubicación y tome fotos o revise su galería"
+            android:textAlignment="center"
+            android:textSize="15dp"
+            android:textStyle="italic"
+            android:typeface="serif" />
 
     </TableRow>
 
@@ -48,9 +66,11 @@
         android:layout_height="wrap_content"
         android:drawablePadding="8dp"
         android:textColor="@android:color/white"
-        android:text="Obtener tu ubicación"
+        android:text="Galería"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:drawableRight="@mipmap/ic_icono_galeria"
+
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginBottom="50dp"

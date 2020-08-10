@@ -6,30 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".Controller.FotosUbicacion.CamaraActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:id="@+id/tituloIluminosidad"
-        android:text="Iluminosidad: "/>
+<include
+    layout="@layout/dato_de_foto_iluminosidad"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/id_iluminosidad"
-        android:layout_toRightOf="@id/tituloIluminosidad"
-        android:textSize="15sp"
-        android:text="0.0"/>
-
-
+    />
 
     <ImageView
         android:id="@+id/capturarImagen"
         android:layout_width="400dp"
         android:layout_height="200dp"
+
         android:layout_above="@+id/surface_view_camera2_activity"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/instrucciones"
+        android:layout_below="@id/surface_view_camera2_activity"
+        android:textSize="15sp"
+        android:text="El dispositivo vibrará si detecta movimientos bruscos"/>
     <SurfaceView
         android:id="@+id/surface_view_camera2_activity"
         android:layout_width="wrap_content"

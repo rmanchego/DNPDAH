@@ -266,6 +266,7 @@ public void detectarMovimientoCamara(){
 public void detectarOrientacion(){
     // En base a la orientación, si se gira de lado izquierdo se abre un toast y nos manda el texto "Orientación Cambiada"
     // Si se vuelve a girar al lado contrario, se manda el mismo mensaje
+
     giroscopio.setListenerGiroscopio(new ListenerGiroscopio() {
         @Override
         public void rotando(float ejex, float ejey, float ejez) {

@@ -37,7 +37,10 @@
         <activity android:name=".Controller.ScannerQR.PerfilPacienteActivity" />
         <activity android:name=".Controller.ScannerQR.AgregarPacienteQRActivity" />
         <activity android:name=".Controller.Pasos.HistorialPasosActivity" />
-        <activity android:name=".Controller.FotosUbicacion.CamaraActivity" />
+        <activity android:name=".Controller.FotosUbicacion.CamaraActivity"
+            android:screenOrientation="portrait"
+            />
+
         <activity android:name=".Controller.FotosUbicacion.UbicacionActivity" />
         <activity android:name=".Controller.Menu.VerInfoUsuario" />
         <activity android:name=".Controller.Menu.MicrofonoActivity" />
