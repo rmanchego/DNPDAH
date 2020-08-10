@@ -136,7 +136,9 @@ public class CamaraActivity extends AppCompatActivity {
 
         //Para reconocer la orientación del dispositivo
         giroscopio = new Giroscopio(this);
+        //Para la vibración
         acelerometro = new Acelerometro(this);
+        //Uso automático del flash
         sensorLuz = new LightSensor(this);
 
     }
@@ -298,10 +300,9 @@ public void detectarIluminosidad(){
     });
 }
 
-    //Método que nos ayuda a controlar el encendido del flash, se añaden las líneas 294-299 debido a que
+    //Método que nos ayuda a controlar el encendido del flash, se añaden las líneas 3017-317 debido a que
     //API Camera 2 necesita de configuraciones extra para poder realizar el manejo del flash, en la línea
-    //296 se realiza la configuración de uso del flash por medio de FLASH_MODE, y como es el método para
-    //activar el flash, entonces se elige la opción FLASH_MODE_TORCH
+    //308 se realiza la configuración de uso del flash por medio de CONTROL_AE_MODE_ON_ALWAYS_FLASH
     public void encenderFlash(){
         mPreviewCaptureRequest.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_ALWAYS_FLASH);
      //   mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE,CaptureRequest.FLA);
