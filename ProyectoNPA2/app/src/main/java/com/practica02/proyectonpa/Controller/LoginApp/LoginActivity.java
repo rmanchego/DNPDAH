@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_app_login);
 
         txtCorreo = findViewById(R.id.idcorreoLogin);
         txtContraseña = findViewById(R.id.idcontraseñaLogin);

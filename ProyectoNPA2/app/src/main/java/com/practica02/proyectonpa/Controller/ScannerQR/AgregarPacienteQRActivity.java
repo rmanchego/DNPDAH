@@ -94,7 +94,7 @@ public class AgregarPacienteQRActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_paciente_q_r);
+        setContentView(R.layout.activity_scannerqr_agregar_paciente_q_r);
 
         fotoPaciente = findViewById(R.id.fotoPacienteRegistro);
         fotoQR = findViewById(R.id.fotoQrcodeRegistro);

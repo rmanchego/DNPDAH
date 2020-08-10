@@ -41,7 +41,7 @@ public class UbicacionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ubicacion);
+        setContentView(R.layout.activity_fotos_ubicacion_ubicacion);
         broadcastReceiver = new LocationBroadcastReceiver(mainActivityInf2);
         checkLocationPermission();
 

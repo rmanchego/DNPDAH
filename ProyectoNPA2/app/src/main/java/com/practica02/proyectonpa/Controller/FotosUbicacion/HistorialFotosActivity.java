@@ -32,7 +32,7 @@ public class HistorialFotosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_historial_fotos);
+        setContentView(R.layout.activity_foto_ubicacion_historial_fotos);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();

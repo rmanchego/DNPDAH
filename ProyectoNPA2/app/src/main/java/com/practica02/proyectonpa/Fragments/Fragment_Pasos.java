@@ -53,7 +53,7 @@ public class Fragment_Pasos extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.frag2_layout,container,false);
+        View v = inflater.inflate(R.layout.frag_pasos_layout,container,false);
 
         viewPasos = v.findViewById(R.id.id_viewpasosFrag);
         cronometro = v.findViewById(R.id.cronometro);

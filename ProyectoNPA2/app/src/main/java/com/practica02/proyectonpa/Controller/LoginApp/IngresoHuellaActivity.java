@@ -53,7 +53,7 @@ public class IngresoHuellaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingreso_huella);
+        setContentView(R.layout.activity_login_app_ingreso_huella);
 
         mHeadingLabel = (TextView) findViewById(R.id.headingLabel);
         mFingerprintImage = (ImageView) findViewById(R.id.fingerprintImage);

@@ -11,8 +11,6 @@ import com.practica02.proyectonpa.Model.Persistencia.FotoDAO;
 import com.practica02.proyectonpa.R;
 import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class VerFotoDeHistorialActivity extends AppCompatActivity {
 
     private String KEY_RECEPTOR;
@@ -26,7 +24,7 @@ public class VerFotoDeHistorialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_foto_de_historial);
+        setContentView(R.layout.activity_fotos_ubicacion_ver_foto_de_historial);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){

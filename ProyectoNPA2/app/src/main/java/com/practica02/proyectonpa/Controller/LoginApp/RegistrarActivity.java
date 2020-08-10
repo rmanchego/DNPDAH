@@ -78,7 +78,7 @@ public class RegistrarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
+        setContentView(R.layout.activity_login_app_registro);
 
         fotoPerfil = findViewById(R.id.fotoPerfil);
         txtNombre = findViewById(R.id.idRegistroNombre);

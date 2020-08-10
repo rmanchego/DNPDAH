@@ -17,7 +17,6 @@ import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.practica02.proyectonpa.R;
@@ -59,7 +58,7 @@ public class PruebasSensoresActivity extends AppCompatActivity implements Sensor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orientacion);
+        setContentView(R.layout.activity_pruebas_sensores);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         ttsParams = new HashMap<String, String>();

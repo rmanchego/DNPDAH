@@ -107,7 +107,7 @@ public class CamaraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camara);
+        setContentView(R.layout.activity_foto_ubicacion_camara);
         verifyStoragePermissions(this);
 
         mAuth = FirebaseAuth.getInstance();

@@ -23,7 +23,7 @@ public class PerfilPacienteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil_paciente);
+        setContentView(R.layout.activity_scannerqr_perfil_paciente);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){

@@ -30,7 +30,7 @@ public class VerInfoUsuario extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_info_usuario);
+        setContentView(R.layout.activity_menu_ver_info_usuario);
 
         imgPerfil = findViewById(R.id.fotoPerfilPerfil);
         txtNombre = findViewById(R.id.idPerfilNombre);
