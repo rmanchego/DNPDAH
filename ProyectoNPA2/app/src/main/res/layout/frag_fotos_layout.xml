@@ -8,10 +8,13 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:src="@drawable/servicioubicacion" />
+        android:layout_height="200dp"
+        android:src="@drawable/servicioubicacion"
+        android:layout_weight="2"/>
 
-    <TableRow android:padding="30dip" >
+    <TableRow android:padding="10dip"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,10 +32,15 @@
         android:drawableRight="@mipmap/icon_localizacion"
         android:drawablePadding="8dp"
         android:textColor="@android:color/white"
-        app:backgroundTint="#ef9a9a"
         android:text="Obtener tu ubicación"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp"
+
+        android:background="@drawable/borde_redondo"/>
 
     <Button
         android:id="@+id/idHistorialFotos"
@@ -40,10 +48,16 @@
         android:layout_height="wrap_content"
         android:drawablePadding="8dp"
         android:textColor="@android:color/white"
-        app:backgroundTint="#ef9a9a"
         android:text="Obtener tu ubicación"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp"
+        android:padding="5dp"
+
+        android:background="@drawable/borde_redondo"/>
+
 
 
 

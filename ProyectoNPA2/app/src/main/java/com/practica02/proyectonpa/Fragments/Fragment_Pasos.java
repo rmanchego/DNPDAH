@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -65,6 +66,13 @@ public class Fragment_Pasos extends Fragment {
         btnGuardar = v.findViewById(R.id.btnGuardarFrag);
         btnVerHistorial = v.findViewById(R.id.btnVerHistorialFrag);
 
+        btnEnabled(btnDetener,false);
+        btnEnabled(btnReiniciar,false);
+        btnEnabled(btnContinuar,false);
+        btnEnabled(btnGuardar,false);
+
+
+
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
@@ -79,12 +87,12 @@ public class Fragment_Pasos extends Fragment {
                 startCronometro();
                 caminando = true;
                 contarPasos = 0;
-                btnComenzar.setEnabled(false);
-                btnContinuar.setEnabled(false);
-                btnDetener.setEnabled(true);
-                btnReiniciar.setEnabled(true);
-                btnGuardar.setEnabled(false);
-                btnGuardar.setBackgroundColor(Color.rgb(0,0,0));
+
+                btnEnabled(btnComenzar, false);
+                btnEnabled(btnContinuar, false);
+                btnEnabled(btnDetener, true);
+                btnEnabled(btnReiniciar, true);
+                btnEnabled(btnGuardar, false);
 
             }
         });
@@ -93,9 +101,10 @@ public class Fragment_Pasos extends Fragment {
             public void onClick(View v) {
                 stopCronometro();
                 caminando = false;
-                btnContinuar.setEnabled(true);
-                btnReiniciar.setEnabled(true);
-                btnGuardar.setEnabled(true);
+
+                btnEnabled(btnContinuar, true);
+                btnEnabled(btnReiniciar, true);
+                btnEnabled(btnGuardar, true);
 
             }
         });
@@ -107,11 +116,13 @@ public class Fragment_Pasos extends Fragment {
                 caminando = false;
                 contarPasos = 0;
                 viewPasos.setText("0");
-                btnComenzar.setEnabled(true);
-                btnContinuar.setEnabled(false);
-                btnDetener.setEnabled(false);
-                btnReiniciar.setEnabled(false);
-                btnGuardar.setEnabled(false);
+
+                btnEnabled(btnComenzar, true);
+                btnEnabled(btnContinuar, false);
+                btnEnabled(btnDetener, false);
+                btnEnabled(btnReiniciar, false);
+                btnEnabled(btnGuardar, false);
+
             }
         });
         btnContinuar.setOnClickListener(new View.OnClickListener() {
@@ -119,11 +130,13 @@ public class Fragment_Pasos extends Fragment {
             public void onClick(View v) {
                 startCronometro();
                 caminando = true;
-                btnComenzar.setEnabled(false);
-                btnContinuar.setEnabled(false);
-                btnDetener.setEnabled(true);
-                btnReiniciar.setEnabled(true);
-                btnGuardar.setEnabled(false);
+
+                btnEnabled(btnComenzar, false);
+                btnEnabled(btnContinuar, false);
+                btnEnabled(btnDetener, true);
+                btnEnabled(btnReiniciar, true);
+                btnEnabled(btnGuardar, false);
+
             }
         });
 
@@ -131,13 +144,12 @@ public class Fragment_Pasos extends Fragment {
             @Override
             public void onClick(View v) {
                 caminando = false;
+
                 btnComenzar.setEnabled(false);
                 btnContinuar.setEnabled(true);
                 btnDetener.setEnabled(true);
                 btnReiniciar.setEnabled(true);
                 btnGuardar.setEnabled(true);
-
-
 
                 String nombrePasos = "";
                 Date date = new Date();
@@ -223,6 +235,17 @@ public class Fragment_Pasos extends Fragment {
         cronometro.setBase(SystemClock.elapsedRealtime());
         detenerse = 0;
         cronometro.stop();
+    }
+
+    public void btnEnabled(Button btn, boolean state){
+        if(state == false) {
+            btn.setEnabled(false);
+            btn.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+        } else {
+            btn.setEnabled(true);
+            btn.getBackground().setColorFilter(null);
+        }
+
     }
 
     @Override
