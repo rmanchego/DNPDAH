@@ -24,6 +24,7 @@ public class Acelerometro {
             public void onSensorChanged(SensorEvent event) {
                 if(listenerAcelerometro!=null){
                     listenerAcelerometro.ejes(event.values[0],event.values[1],event.values[2]);
+
                 }
             }
 

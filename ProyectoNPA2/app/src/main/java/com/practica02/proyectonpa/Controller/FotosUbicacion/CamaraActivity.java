@@ -121,6 +121,7 @@ public class CamaraActivity extends AppCompatActivity {
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 takePicture();
                 Log.d(TAG,"foto tomada");
             }
@@ -288,7 +289,8 @@ public void detectarIluminosidad(){
             valorIluminosidad.setText(String.valueOf(valsensorluz));
             if(valsensorluz<5.0){
                  Toast.makeText(getApplicationContext(),"Flash automático activado", Toast.LENGTH_LONG).show();
-                encenderFlash();
+
+                 encenderFlash();
             }else{
                 apagarFlash();
             }

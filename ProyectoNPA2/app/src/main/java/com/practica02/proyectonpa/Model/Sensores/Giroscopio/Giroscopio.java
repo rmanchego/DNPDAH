@@ -10,7 +10,9 @@ import android.hardware.SensorManager;
 
 public class Giroscopio {
     private ListenerGiroscopio listenerGiroscopio;
-
+    float a = 0.2f;
+    float ejez;
+    float mLastZ,mHighPassZ;
     public void setListenerGiroscopio(ListenerGiroscopio listenerGiroscopio) {
         this.listenerGiroscopio = listenerGiroscopio;
     }
@@ -25,7 +27,10 @@ public class Giroscopio {
             @Override
             public void onSensorChanged(SensorEvent event) {
                 if(listenerGiroscopio!=null){
-                    listenerGiroscopio.rotando(event.values[0],event.values[1],event.values[2]);
+                    ejez =event.values[2];
+                    mHighPassZ = highPassA1(ejez,mLastZ,mHighPassZ);
+                    mLastZ = ejez;
+                    listenerGiroscopio.rotando(event.values[0],event.values[1],ejez);
                 }
             }
 
@@ -35,7 +40,9 @@ public class Giroscopio {
             }
         };
     }
-
+    float highPassA1(float current, float last, float filtered){
+        return a * (filtered+current-last);
+    }
     public void register(){
         sensorManager.registerListener(sensorEventListener,sensorgiroscopio,SensorManager.SENSOR_DELAY_NORMAL);
     }
