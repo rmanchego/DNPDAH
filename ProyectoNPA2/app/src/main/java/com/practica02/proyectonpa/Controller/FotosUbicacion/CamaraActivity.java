@@ -450,7 +450,7 @@ public void detectarIluminosidad(){
                         nombreFoto = simpleDateFormat.format(date);
 
                         Foto fotoTomada = new Foto();
-                        fotoTomada.setFotoPerfilURL(url);
+                        fotoTomada.setFotoFotoURL(url);
                         fotoTomada.setNombre(nombreFoto);
                         fotoTomada.setLatitud(latitud);
                         fotoTomada.setLongitud(longitud);

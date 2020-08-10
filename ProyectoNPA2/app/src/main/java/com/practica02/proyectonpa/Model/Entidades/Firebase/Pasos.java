@@ -10,6 +10,8 @@ public class Pasos {
 
     }
 
+    //Logica de BD
+
     public int getPasos() {
         return pasos;
     }

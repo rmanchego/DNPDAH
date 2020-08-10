@@ -95,7 +95,7 @@ public class Fragment_CodigoQR extends Fragment{
 
             @Override
             protected void onBindViewHolder(PacienteViewHolder holder, int position, Paciente model) {
-                Glide.with(Fragment_CodigoQR.this).load(model.getFotoPerfilURL()).into(holder.getCivFotoPerfil());
+                Glide.with(Fragment_CodigoQR.this).load(model.getFotoPacienteURL()).into(holder.getCivFotoPerfil());
                 holder.getTxtNombreUsuario().setText(model.getNombre());
                 //Obtiene toda la data de la lista //  Key en getSpanpshot 2
                 final LPaciente lPaciente = new LPaciente(getSnapshots().getSnapshot(position).getKey(),model);

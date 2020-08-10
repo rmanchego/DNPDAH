@@ -60,7 +60,7 @@ public class HistorialFotosActivity extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(HistorialFotosViewHolder holder, int position, Foto model) {
-                Glide.with(HistorialFotosActivity.this).load(model.getFotoPerfilURL()).into(holder.getCivFoto());
+                Glide.with(HistorialFotosActivity.this).load(model.getFotoFotoURL()).into(holder.getCivFoto());
                 holder.getTxtNombreFoto().setText(model.getNombre());
                 //Obtiene toda la data de la lista //  Key en getSpanpshot 2
                 final LFoto lFoto = new LFoto(getSnapshots().getSnapshot(position).getKey(),model);

@@ -9,6 +9,8 @@ public class Audio {
 
     }
 
+    //Logica de BD
+
     public String getURLAudio() {
         return URLAudio;
     }

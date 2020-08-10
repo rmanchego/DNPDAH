@@ -45,7 +45,7 @@ public class PerfilPacienteActivity extends AppCompatActivity {
         PacienteDAO.getInstancia().obtenerInformacionDePacientePorLlave(KEY_RECEPTOR, new PacienteDAO.IDevolverPaciente() {
             @Override
             public void devolverPaciente(LPaciente lPaciente) {
-                String urlFoto = lPaciente.getPaciente().getFotoPerfilURL();
+                String urlFoto = lPaciente.getPaciente().getFotoPacienteURL();
                 loadImageFromURL(urlFoto);
                 String urlCodigoQR = lPaciente.getPaciente().getFotoCodigoQR();
                 loadImageFromURLQR(urlCodigoQR);

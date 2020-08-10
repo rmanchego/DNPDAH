@@ -2,7 +2,7 @@ package com.practica02.proyectonpa.Model.Entidades.Firebase;
 
 public class Paciente {
 
-    private String fotoPerfilURL;
+    private String fotoPacienteURL;
     private String fotoCodigoQR;
     private String nombre;
     private long fechaDeNacimiento;
@@ -18,12 +18,12 @@ public class Paciente {
     //Logica de BD
 
 
-    public String getFotoPerfilURL() {
-        return fotoPerfilURL;
+    public String getFotoPacienteURL() {
+        return fotoPacienteURL;
     }
 
-    public void setFotoPerfilURL(String fotoPerfilURL) {
-        this.fotoPerfilURL = fotoPerfilURL;
+    public void setFotoPacienteURL(String fotoPacienteURL) {
+        this.fotoPacienteURL = fotoPacienteURL;
     }
 
     public String getFotoCodigoQR() {

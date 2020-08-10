@@ -281,7 +281,7 @@ public class AgregarPacienteQRActivity extends AppCompatActivity {
                                  paciente.setAltura(Float.parseFloat(altura));
                                  paciente.setPeso(Float.parseFloat(peso));
                                  paciente.setPresion(Float.parseFloat(presion));
-                                 paciente.setFotoPerfilURL(url1);
+                                 paciente.setFotoPacienteURL(url1);
                                  paciente.setFotoCodigoQR(url2);
 
                                  String nombrekey = "";

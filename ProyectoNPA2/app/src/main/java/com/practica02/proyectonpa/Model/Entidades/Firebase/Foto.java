@@ -1,7 +1,7 @@
 package com.practica02.proyectonpa.Model.Entidades.Firebase;
 
 public class Foto {
-    private String fotoPerfilURL;
+    private String fotoFotoURL;
     private String nombre;
     private String direccion;
     private String latitud;
@@ -15,12 +15,12 @@ public class Foto {
 
     //Logica de BD
 
-    public String getFotoPerfilURL() {
-        return fotoPerfilURL;
+    public String getFotoFotoURL() {
+        return fotoFotoURL;
     }
 
-    public void setFotoPerfilURL(String fotoPerfilURL) {
-        this.fotoPerfilURL = fotoPerfilURL;
+    public void setFotoFotoURL(String fotoFotoURL) {
+        this.fotoFotoURL = fotoFotoURL  ;
     }
 
     public String getNombre() {

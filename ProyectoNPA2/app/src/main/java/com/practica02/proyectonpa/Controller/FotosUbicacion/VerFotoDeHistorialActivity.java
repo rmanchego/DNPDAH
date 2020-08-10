@@ -42,7 +42,7 @@ public class VerFotoDeHistorialActivity extends AppCompatActivity {
         FotoDAO.getInstancia().obtenerInformacionDeFotoPorLlave(KEY_RECEPTOR, new FotoDAO.IDevolverFoto() {
             @Override
             public void devolverFoto(LFoto lFoto) {
-                String urlFoto = lFoto.getFoto().getFotoPerfilURL();
+                String urlFoto = lFoto.getFoto().getFotoFotoURL();
                 loadImageFromURL(urlFoto);
                 tvFecha.setText(lFoto.getFoto().getNombre());
                 tvUbicacion.setText(lFoto.getFoto().getDireccion());
