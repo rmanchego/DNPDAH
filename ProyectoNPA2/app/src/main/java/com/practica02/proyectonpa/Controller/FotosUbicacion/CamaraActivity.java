@@ -285,6 +285,7 @@ public void detectarIluminosidad(){
             if(valsensorluz<5.0){
                 // Toast.makeText(getApplicationContext(),"Valorssw", Toast.LENGTH_LONG).show();
                 encenderFlash();
+
             }else{
                 apagarFlash();
             }
@@ -297,7 +298,9 @@ public void detectarIluminosidad(){
     //296 se realiza la configuración de uso del flash por medio de FLASH_MODE, y como es el método para
     //activar el flash, entonces se elige la opción FLASH_MODE_TORCH
     public void encenderFlash(){
-        mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE,CaptureRequest.FLASH_MODE_TORCH);
+        mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_TORCH);
+        mPreviewCaptureRequest.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON);
+     //   mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE,CaptureRequest.FLA);
         try {
             mCaptureSession.setRepeatingRequest(mPreviewCaptureRequest.build(),null,null);
         } catch (CameraAccessException e) {
@@ -312,7 +315,12 @@ public void detectarIluminosidad(){
     //FLASH_MODE_OFF.
 
     public void apagarFlash(){
-        mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE,CaptureRequest.FLASH_MODE_OFF);
+        //mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE,CaptureRequest.FLASH_MODE_OFF);
+        mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF);
+        mPreviewCaptureRequest.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_OFF);
+
+        //  mPreviewCaptureRequest.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_SINGLE);
+
         try {
             mCaptureSession.setRepeatingRequest(mPreviewCaptureRequest.build(),null,null);
         } catch (CameraAccessException e) {
@@ -320,7 +328,6 @@ public void detectarIluminosidad(){
         }
         flashEncendido=false;
     }
-
     //Método que permite que un dispositivo vibre, en la condición se establece que según la API del dispositivo, en este caso
     //dispositivo con API's mayor a 26, usarán cierta forma de obtención de la vibración, caso contrario se utilizará otra forma
     //Esto se hace con la finalidad de abarcar más dispositivos.
