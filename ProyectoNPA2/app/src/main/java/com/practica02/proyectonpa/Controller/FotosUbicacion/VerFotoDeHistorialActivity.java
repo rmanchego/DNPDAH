@@ -56,8 +56,6 @@ public class VerFotoDeHistorialActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void loadImageFromURL(String url){

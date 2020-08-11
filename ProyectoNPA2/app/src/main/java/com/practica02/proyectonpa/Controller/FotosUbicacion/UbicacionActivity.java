@@ -71,6 +71,7 @@ public class UbicacionActivity extends AppCompatActivity {
 
             txtlatitud.setText(latitud);
             txtlongitud.setText(longitud);
+            //Geocoder lo utilizamos para realizar el proceso de geolocalización inverso
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
 
             try {

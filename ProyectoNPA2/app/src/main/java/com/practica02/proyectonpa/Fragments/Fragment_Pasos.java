@@ -175,6 +175,7 @@ public class Fragment_Pasos extends Fragment {
                 pasos.setPasos(contarPasos);
                 pasos.setFecha(date2.getTime());
                 long time = (SystemClock.elapsedRealtime()-cronometro.getBase());
+                //Metodos para transformar al formato de la hora
                 int h   = (int)(time /3600000);
                 int m = (int)(time - h*3600000)/60000;
                 int s= (int)(time - h*3600000- m*60000)/1000 ;

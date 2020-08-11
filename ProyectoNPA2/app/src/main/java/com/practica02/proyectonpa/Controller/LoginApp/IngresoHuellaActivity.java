@@ -104,7 +104,6 @@ public class IngresoHuellaActivity extends AppCompatActivity {
     private void generateKey() {
 
         try {
-
             keyStore = KeyStore.getInstance("AndroidKeyStore");
             KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
 

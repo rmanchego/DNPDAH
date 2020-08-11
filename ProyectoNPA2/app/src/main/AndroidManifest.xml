@@ -26,10 +26,10 @@
     <application
         android:name=".Model.Persistencia.FirebasePersistance"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_dah_redondo"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_dah_redondo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Controller.FotosUbicacion.VerFotoDeHistorialActivity"></activity>
@@ -59,11 +59,7 @@
 
         <activity android:name=".Controller.LoginApp.RegistrarActivity" />
         <activity android:name=".Controller.LoginApp.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Controller.MainActivity"
@@ -71,7 +67,14 @@
         <activity
             android:name=".Controller.LoginApp.IngresoHuellaActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".Controller.ScannerQR.QrScannerActivity" />
         <activity
             android:name=".Model.Utilidades.CapturarActivity"
