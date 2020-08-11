@@ -43,14 +43,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre"
+                    android:hint="Nombre:"
                     android:padding="5sp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColorHint="#FFFFFF"
                     />
@@ -62,20 +63,23 @@
                     android:hint=""
                     android:textColorHint="#FFFFFF"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:padding="5sp"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Correo"
-                    android:textSize="18sp"
+                    android:hint="Correo:"
+                    android:textSize="16sp"
                     android:padding="5sp"
                     android:textStyle="bold"
                     android:textColorHint="#FFFFFF"
@@ -88,7 +92,7 @@
                     android:hint=""
                     android:textColorHint="#FFFFFF"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:padding="5sp"/>
 
             </LinearLayout>
@@ -117,13 +121,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="F. Nacimiento"
-                    android:textSize="18sp"
+                    android:hint="F. Nacimiento:"
+                    android:textSize="16sp"
                     android:padding="5sp"
                     android:textStyle="bold"
                     android:textColorHint="#FFFFFF"
@@ -134,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint=""
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
                     android:padding="5sp"/>
@@ -143,13 +150,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Genero"
-                    android:textSize="18sp"
+                    android:hint="Genero:"
+                    android:textSize="16sp"
                     android:padding="5sp"
                     android:textStyle="bold"
                     android:textColorHint="#FFFFFF"
@@ -160,7 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint=""
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:padding="5sp"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
