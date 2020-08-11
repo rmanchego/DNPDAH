@@ -136,18 +136,13 @@ public class RegistrarActivity extends AppCompatActivity {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(RegistrarActivity.this);
                 dialog.setTitle("Foto de perfil");
 
-                String[] items = {"Galeria", "Camara"};
+                String[] items = {"Camara"};
 
                 dialog.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         switch (i){
                             case 0:
-                                //Hizo click en la galeria
-                                imagePicker.pickImage();
-                                break;
-                            case 1:
-                                //Hizo click en la camara
                                 pickerPath = cameraPicker.pickImage();
                                 break;
                         }
