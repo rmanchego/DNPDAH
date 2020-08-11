@@ -300,7 +300,7 @@ public void detectarIluminosidad(){
     });
 }
 
-    //Método que nos ayuda a controlar el encendido del flash, se añaden las líneas 3017-317 debido a que
+    //Método que nos ayuda a controlar el encendido del flash, se añaden las líneas 301-317 debido a que
     //API Camera 2 necesita de configuraciones extra para poder realizar el manejo del flash, en la línea
     //308 se realiza la configuración de uso del flash por medio de CONTROL_AE_MODE_ON_ALWAYS_FLASH
     public void encenderFlash(){

@@ -16,6 +16,10 @@
         android:id="@+id/item_ver_info"
         android:title="Ver Info"
         apps:showAsAction="never"/>
+    <item
+        android:id="@+id/item_ver_mapa"
+        android:title="Ver Mapa"
+        apps:showAsAction="never"/>
 
     <item
         android:id="@+id/item_logout"

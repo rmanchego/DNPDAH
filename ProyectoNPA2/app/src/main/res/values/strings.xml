@@ -28,5 +28,6 @@
     <string name="rollLabel">Roll (Y Axis):</string>
     <string name="faceUpText">Face Up</string>
     <string name="faceDownText">Face Down</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

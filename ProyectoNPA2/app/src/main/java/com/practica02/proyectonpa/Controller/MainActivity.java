@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
@@ -34,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.practica02.proyectonpa.Controller.LoginApp.LoginActivity;
 import com.practica02.proyectonpa.Controller.Menu.VerInfoUsuario;
+import com.practica02.proyectonpa.Controller.Menu.MapsActivity;
 import com.practica02.proyectonpa.Model.AudioRecorder;
 import com.practica02.proyectonpa.Model.Entidades.Firebase.Audio;
 import com.practica02.proyectonpa.Model.Persistencia.AudioDAO;
@@ -129,6 +128,29 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_ver_info:
                 Intent intent = new Intent(MainActivity.this, VerInfoUsuario.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.item_ver_mapa:
+                final AlertDialog.Builder map = new AlertDialog.Builder(MainActivity.this);
+                map.setMessage("Esta a punto de acceder al historial de ubicaciones en el mapa, verá la ubicación de donde se tomaron las fotos")
+                        .setCancelable(false)
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intents = new Intent(MainActivity.this, MapsActivity.class);
+                                startActivity(intents);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog mapIr = map.create();
+                mapIr.setTitle("Historial de Ubicación en el Mapa");
+                mapIr.show();
+
                 return true;
 
             case R.id.item_logout:
