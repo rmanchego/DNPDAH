@@ -257,8 +257,8 @@ public class AgregarPacienteQRActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String nombre = txtNombre.getText().toString();
                 final String altura = txtAltura.getText().toString();
-                final String peso = txtAltura.getText().toString();
-                final String presion = txtAltura.getText().toString();
+                final String peso = txtPeso.getText().toString();
+                final String presion = txtPresion.getText().toString();
                 if(validarString(nombre) && validarString(altura) && validarString(peso) && validarString(presion)) {
                      final String genero;
                      if(rdHombre.isChecked()){

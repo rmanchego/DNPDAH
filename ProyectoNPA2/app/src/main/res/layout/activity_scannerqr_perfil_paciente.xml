@@ -69,6 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="30dp"
         android:layout_below="@id/fotoQrcodePerfil"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp">
@@ -84,7 +85,7 @@
             android:textSize="17dp" />
 
         <TextView
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint=""
         android:textSize="17dp"
@@ -107,8 +108,8 @@
         android:layout_marginRight="50dp">
 
         <TextView
-            android:layout_width="86dp"
-            android:layout_height="match_parent"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/txtPacienteNombrePerfil"
             android:layout_toLeftOf="@id/txtPacienteNombrePerfil"
             android:text="Fecha de Nacimiento:"
@@ -116,7 +117,7 @@
             android:textSize="13dp" />
 
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint=""
             android:textSize="17dp"
@@ -147,7 +148,7 @@
             android:textSize="17dp" />
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint=""
         android:textSize="17dp"
@@ -178,7 +179,7 @@
             android:textSize="17dp" />
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="17dp"
@@ -208,7 +209,7 @@
             android:textSize="17dp" />
 
         <TextView
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint=""
         android:layout_below="@+id/txtPacientePesoPerfil"
@@ -241,7 +242,7 @@
             android:textSize="17dp" />
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint=""
         android:layout_below="@+id/txtPacienteAlturaPerfil"
