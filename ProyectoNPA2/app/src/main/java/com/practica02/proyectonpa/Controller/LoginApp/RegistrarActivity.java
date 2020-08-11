@@ -205,6 +205,7 @@ public class RegistrarActivity extends AppCompatActivity {
                                                     Usuario usuario = new Usuario();
                                                     usuario.setCorreo(correo);
                                                     usuario.setNombre(nombre);
+                                                    usuario.setFotoPerfilURL(url);
                                                     usuario.setFechaDeNacimiento(fechaDeNacimiento);
                                                     usuario.setGenero(genero);
                                                     FirebaseUser currentUser = mAuth.getCurrentUser(); //esto funciona cuando esta registrado correctamente
