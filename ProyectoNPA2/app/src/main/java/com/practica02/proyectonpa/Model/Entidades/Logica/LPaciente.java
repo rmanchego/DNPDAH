@@ -43,7 +43,7 @@ public class LPaciente {
     public static String getReporte(Paciente paciente){
         return "Nombre: " + paciente.getNombre() + "\nFecha de Nacimiento: " +
                 obtenerFechaDeNacimiento(paciente.getFechaDeNacimiento()) +
-                "\nGenero" + paciente.getGenero() +"\nAltura: " + paciente.getAltura()
-                + "\nPeso: " + paciente.getPeso() + "\nPresion: " + paciente.getPresion();
+                "\nGenero" + paciente.getGenero() +"\nAltura: " + paciente.getAltura() + "m"
+                + "\nPeso: " + paciente.getPeso() +"kg"+ "\nPresion: " + paciente.getPresion();
     }
 }
